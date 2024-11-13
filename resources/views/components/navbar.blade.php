@@ -14,7 +14,7 @@
   </div>
     @auth
         <div class="space-x-6 font-bold flex">
-            <a href="/jobs/create">Post a Job</a>
+             <span class="py-3">Hello, {{ Auth::user()->name }}</span>
             <form method="POST" action="/logout">
                 @csrf
                 @method('DELETE')

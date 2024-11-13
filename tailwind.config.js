@@ -11,6 +11,9 @@ export default {
     ],
     theme: {
         extend: {
+            colors:{
+                "brownBear":"#835C3B",
+            },
             backgroundColor:{
                 "camelBrown":"#C19A6B",
                 "brownBear":"#835C3B",

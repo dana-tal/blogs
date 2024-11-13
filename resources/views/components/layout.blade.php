@@ -13,7 +13,7 @@
         rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-antiqueWhite text-amber-900  pb-20">
+<body class="bg-antiqueWhite text-brownBear  pb-20">
     @php
      $jobs = new stdClass();
      $jobs->title = 'Jobs';
