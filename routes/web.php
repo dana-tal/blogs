@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ManageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,4 +17,13 @@ Route::middleware('guest')->group( function () { // each of the fallowing routes
     Route::post('login',[UserController::class,'perform_login']);
 } );
 
-Route::delete('logout',[UserController::class,'perform_logout']);
+
+Route::middleware('auth')->group( function () {
+    Route::delete('logout',[UserController::class,'perform_logout']);
+    Route::get('manage_blog',[ManageController::class,'index']);
+    Route::get('categories',[CategoryController::class,'index']);
+});
+
+Route::fallback(function () {
+    return view('not_found');
+});
