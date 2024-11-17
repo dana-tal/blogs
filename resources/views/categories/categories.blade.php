@@ -8,7 +8,7 @@
         <div class="flex justify-center mt-3">
             <ul >
                 @foreach($categories as $cat)
-                    <li class="mb-2">{{ $cat->name }}</li>
+                    <li class="mb-2 underline"> <a href="/categories/edit/{{ $cat->id }}">{{ $cat->name }}</a></li>
                 @endforeach
             </ul>
         </div>

@@ -24,6 +24,8 @@ Route::middleware('auth')->group( function () {
     Route::get('/categories',[CategoryController::class,'index']);
     Route::get('/categories/add',[CategoryController::class,'create']);
     Route::post('/categories',[CategoryController::class,'store']);
+    Route::get('/categories/edit/{id}',[CategoryController::class,'edit']);
+    Route::patch('/categories/{id}',[CategoryController::class,'update']);
 
 });
 

@@ -35,14 +35,6 @@ class CategoryController extends Controller
 
         Category::create($attributes);
         return redirect('/categories');
-
-      /*  $job =   Job::create([
-            'title'=>request('title'),
-            'salary'=>request('salary'),
-            'employer_id'=>1 // assuming the employer is logged in , we can have this field value from the user session
-   ]);*/
-
-
     }
 
     /**
@@ -58,7 +50,8 @@ class CategoryController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $cat = Category::find($id);
+        return view('categories.edit',['cat'=>$cat]);
     }
 
     /**
@@ -66,7 +59,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        request()->validate([
+            'name'=>['required']
+           ]);
+        $cat = Category::find($id);
+        $cat->update(['name'=>request('name')]);
+        return redirect('/categories') ;
     }
 
     /**
