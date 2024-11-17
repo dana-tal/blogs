@@ -21,7 +21,10 @@ Route::middleware('guest')->group( function () { // each of the fallowing routes
 Route::middleware('auth')->group( function () {
     Route::delete('logout',[UserController::class,'perform_logout']);
     Route::get('manage_blog',[ManageController::class,'index']);
-    Route::get('categories',[CategoryController::class,'index']);
+    Route::get('/categories',[CategoryController::class,'index']);
+    Route::get('/categories/add',[CategoryController::class,'create']);
+    Route::post('/categories',[CategoryController::class,'store']);
+
 });
 
 Route::fallback(function () {
