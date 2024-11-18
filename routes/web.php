@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ManageController;
 use App\Http\Controllers\UserController;
@@ -27,6 +28,9 @@ Route::middleware('auth')->group( function () {
     Route::get('/categories/edit/{id}',[CategoryController::class,'edit']);
     Route::patch('/categories/{id}',[CategoryController::class,'update']);
 
+    Route::get('/blogs',[BlogController::class,'index']);
+    Route::get('/blogs/add',[BlogController::class,'create']);
+    Route::post('/blogs',[BlogController::class,'store']);
 });
 
 Route::fallback(function () {

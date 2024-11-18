@@ -14,6 +14,8 @@
         'class' => 'rounded-xl bg-white border border-white/10 '.$width,
         'value' => old($name),
     ];
+
+
 @endphp
 
 <div class="grid grid-cols-5 gap-3">
@@ -21,7 +23,12 @@
         <div ><label class="font-bold" for="{{ $name }}">{{ $label }}:</label></div>
     @endif
     <div class="col-span-4">
-        <input {{ $attributes($defaults) }} />
+
+        @if ($attributes->get('type') === 'textarea')
+           <textarea {{ $attributes($defaults) }}></textarea>
+        @else
+            <input {{ $attributes($defaults) }} />
+        @endif
         <x-forms.error :error="$errors->first($name)" />
     </div>
 </div>
