@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Blog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\File;
 
 class BlogController extends Controller
@@ -14,7 +16,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return view('blogs.index');
+        $blogs = Blog::where('user_id',Auth::user()->id)->latest()->paginate(10);
+        return view('blogs.index',['blogs'=>$blogs]);
     }
 
     /**
@@ -69,7 +72,8 @@ class BlogController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $blog = Blog::find($id);
+        return view('blogs.edit',['blog'=>$blog]);
     }
 
     /**
@@ -77,7 +81,40 @@ class BlogController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        // get the original filename
+        // $file = $request->file('image');
+       // $name = $file->getClientOriginalName();
+
+        // when image is present the $request->image is an object of type UploadedFile
+        // when image is not present $request->image is null
+
+        $attributes = $request->validate([
+            'subject'  => ['required'],
+            'description' =>['required'],
+            'image' => ['image','max:2048','unique:blogs,image',File::types(['png', 'jpg', 'jpeg','gif'])]
+        ]);
+
+        $blog = Blog::find($id);
+        if ($request->image)
+        {
+            if ( $blog->image)
+            {
+                Storage::delete($blog->image);
+            }
+            $image_path = $request->image->store('images');
+        }
+        else
+        {
+            $image_path = null;
+        }
+
+        $blog->update([
+            'subject' => $attributes['subject'],
+            'description' => $attributes['description'],
+            'image'=>$image_path
+        ]);
+
+        return redirect('/blogs');
     }
 
     /**
@@ -85,6 +122,12 @@ class BlogController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $blog = Blog::find($id);
+        if ($blog->image)
+        {
+            Storage::delete($blog->image);
+        }
+        $blog->delete();
+        return redirect('/blogs');
     }
 }

@@ -3,7 +3,7 @@
 <nav class="flex justify-between items-center py-4 border-b border-white/10 bg-brownBear rounded-xl text-white px-3">
     <div>
         <a href="/">
-            <img src="{{ Vite::asset('resources/images/logo.svg') }}" alt="">
+            <img src="{{ Vite::asset('resources/images/pencil.svg') }}" alt="" width="35px">
         </a>
     </div>
     <div class="space-x-6 font-bold">

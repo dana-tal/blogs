@@ -31,6 +31,11 @@ Route::middleware('auth')->group( function () {
     Route::get('/blogs',[BlogController::class,'index']);
     Route::get('/blogs/add',[BlogController::class,'create']);
     Route::post('/blogs',[BlogController::class,'store']);
+    Route::get('/blogs/edit/{id}',[BlogController::class,'edit']);
+    Route::patch('/blogs/{id}',[BlogController::class,'update']);
+    Route::delete('/blogs/{id}',[BlogController::class,'destroy']);
+
+
 });
 
 Route::fallback(function () {

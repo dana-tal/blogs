@@ -25,7 +25,7 @@
     <div class="col-span-4">
 
         @if ($attributes->get('type') === 'textarea')
-           <textarea {{ $attributes($defaults) }}></textarea>
+           <textarea {{ $attributes($defaults) }}>{{ $attributes->get('value') }} </textarea>
         @else
             <input {{ $attributes($defaults) }} />
         @endif
