@@ -1,4 +1,4 @@
-<x-admin>
+<x-admin_layout>
     <div class="grid grid-col-1">
 
         <h1 class="text-xl font-bold flex justify-center">Manage Your Blogs</h1>
@@ -19,4 +19,4 @@
 
 
     </div>
-</x-admin>
+</x-admin_layout>

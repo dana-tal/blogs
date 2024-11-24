@@ -1,9 +1,12 @@
-<x-layout>
-    <x-page-heading>Create A New Category</x-page-heading>
-    <x-forms.form method="POST" action="/categories" >
-        <x-forms.input label="Name" name="name" />
+<x-admin_layout>
 
-        <x-forms.button>Create Category</x-forms.button>
-    </x-forms.form>
+    <div class="grid grid-cols-1">
+        <x-page-heading>Create A New Category</x-page-heading>
+        <x-forms.form method="POST" action="/categories" >
+            <x-forms.input label="Name" name="name" />
 
-</x-layout>
+            <x-forms.button>Create Category</x-forms.button>
+        </x-forms.form>
+    </div>
+
+</x-admin_layout>

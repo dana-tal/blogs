@@ -1,4 +1,4 @@
-<x-layout>
+<x-admin_layout>
     <div class="grid grid-col-1">
 
         <h1 class="text-xl font-bold flex justify-center">Categories Page</h1>
@@ -19,4 +19,4 @@
 
 
     </div>
-</x-layout>
+</x-admin_layout>
