@@ -1,9 +1,9 @@
 <x-admin_layout>
-    <div class="grid grid-col-1">
+    <div class="grid grid-col-1 mt-6">
 
         <h1 class="text-xl font-bold flex justify-center">Manage Your Blogs</h1>
 
-        <a href="/blogs/add" class="flex justify-center mt-3 underline">Add a New Blog </a>
+        <a href="/blogs/add" class="flex justify-center mt-10 mb-4 underline">Add a New Blog </a>
 
         <div class="flex justify-center mt-7">
             <ul >

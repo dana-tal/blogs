@@ -34,13 +34,13 @@
 
             <div class="grid grid-cols-5  gap-4 h-screen">
                 <div class="col-span-1 bg-camelBrown ">
-                    <div class="flex justify-center mt-4 font-bold">
+                    <div class="flex justify-center mt-4 font-bold text-white">
                         <ul >
-                            <li class="mb-6 hover:bg-antiqueWhite"><a  href="/blogs">Manage Blogs</a></li>
-                            <li class="mb-6 hover:bg-antiqueWhite"><a  href="/categories">Manage Categories</a></li>
-                            <li class="mb-6 hover:bg-antiqueWhite"><a > Manage Tags</a></li>
-                            <li class="mb-6 hover:bg-antiqueWhite"><a > Manage Articles</a></li>
-                            <li class="mb-6 hover:bg-antiqueWhite"><a > Manage Images</a></li>
+                            <x-sidebar_li  link="/blogs" :active="request()->is('blogs')">Manage Blogs</x-sidebar_li>
+                            <x-sidebar_li  link="/categories" :active="request()->is('categories')">Manage Categories</x-sidebar_li>
+                            <x-sidebar_li  link="/tags" :active="request()->is('tags')">Manage Tags</x-sidebar_li>
+                            <x-sidebar_li  link="/articles" :active="request()->is('articles')">Manage Articles</x-sidebar_li>
+                            <x-sidebar_li  link="/images" :active="request()->is('images')">Manage Images</x-sidebar_li>
                         </ul>
                     </div>
                 </div>
