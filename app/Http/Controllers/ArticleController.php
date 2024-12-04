@@ -56,17 +56,31 @@ class ArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Article $article)
     {
-        //
+        $blog = $article->blog;
+        return view('articles.edit',['article'=>$article,'blog'=>$blog]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Article $article)
     {
-        //
+
+        $attributes = $request->validate([
+            'title'  => ['required'],
+            'body' =>['required'],
+        ]);
+
+        $article->update([
+            'title' => $attributes['title'],
+            'body' => $attributes['body'],
+        ]);
+
+        $blog_id = $article->blog->id;
+        return redirect('/articles/'.$blog_id);
+
     }
 
     /**
