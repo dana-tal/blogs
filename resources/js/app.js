@@ -8,3 +8,6 @@ import {
 
   initTWE({ Collapse });
   initTWE({ Tab });
+
+  import jQuery from 'jquery';
+  window.$ = jQuery;

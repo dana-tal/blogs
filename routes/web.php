@@ -41,6 +41,7 @@ Route::middleware('auth')->group( function () {
     Route::post('/articles/{blog}',[ArticleController::class,'store']);
     Route::get('/articles/edit/{article}',[ArticleController::class,'edit']);
     Route::patch('/articles/{article}',[ArticleController::class,'update']);
+    Route::delete('/articles/{blog}',[ArticleController::class,'destroy']);
 });
 
 Route::fallback(function () {

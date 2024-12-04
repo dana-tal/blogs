@@ -8,17 +8,58 @@
             <a href="/articles/add/{{ $blog->id }}" class="underline">Add a New Article </a>
         </div>
 
-        <div class="flex justify-center mt-7">
-            <ul >
-                @foreach($articles as $article)
-                    <li class="mb-2"><span>{{ $article->id }}.</span> <span class="px-5">{{ $article->created_at }}</span> <a href="/articles/edit/{{ $article->id }}" class="underline">{{ $article->title }}</a></li>
-                @endforeach
-            </ul>
-        </div>
+        <form method="POST" action="/articles/{{ $blog->id}}" id="delete-form" >
+            @csrf
+            @method('DELETE')
+            <div class="flex justify-center ">
+                <table >
+                    @foreach($articles as $article)
+                        <tr class="mb-2">
+                            <td><input name="delete_articles[]" id={{ $article->id }} value={{ $article->id }} type="checkbox" /></td>
+                            <td class="px-5">{{ $article->id }}.</td>
+                            <td class="px-5">{{ $article->created_at }}</td>
+                            <td><a href="/articles/edit/{{ $article->id }}" class="underline">{{ $article->title }}</a></td>
+                        </tr>
+                    @endforeach
+                </table>
+            </div>
+            <input type="hidden" id="blog_id" value="{{ $blog->id }}}" />
+            <x-forms.button type="button" id="delete_button" bgColor="bg-red-800" class=" text-sm font-bold mt-10">Delete</x-forms.button>
+        </form>
 
         <div class="flex justify-center mt-5">
             {{ $articles->links() }}
         </div>
 
     </div>
+
+    <script type="module">
+        $("#delete_button").click(function(){
+
+           let text='';
+           let all_checked = [];
+
+           $('input[type=checkbox]:checked').each(function () {
+              all_checked.push( $(this).val());
+            });
+
+            let all_checked_str = "";
+           if (all_checked.length >0 )
+           {
+                all_checked_str = all_checked.join(",");
+                text = "Are you sure you want to delete "+all_checked_str+" ? Press O.K or Cancel ";
+                if (confirm(text) == true )
+                {
+                    $('#delete-form').submit();
+                }
+           }
+           else
+            {
+                alert("Please select articles to delete");
+            }
+
+
+        });
+    </script>
 </x-admin_layout>
+
