@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ManageController;
@@ -35,6 +36,7 @@ Route::middleware('auth')->group( function () {
     Route::patch('/blogs/{id}',[BlogController::class,'update']);
     Route::delete('/blogs/{id}',[BlogController::class,'destroy']);
 
+    Route::get('/articles/{blog}',[ArticleController::class,'index']);
 
 });
 

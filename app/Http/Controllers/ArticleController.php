@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blog;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -9,9 +10,9 @@ class ArticleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Blog $blog)
     {
-        //
+        dd($blog);
     }
 
     /**

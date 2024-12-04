@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Article;
+use App\Models\Blog;
 use App\Models\Category;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -20,9 +22,9 @@ class DatabaseSeeder extends Seeder
             Category::create(['name'=>$cat]);
         }
 
-        //Category::factory(30)->create();
-        // User::factory(10)->create();
-
+        User::factory(10)->create();
+        Blog::factory(50)->create();
+        Article::factory(500)->create();
 
        /* User::factory()->create([
             'name' => 'Test User',
