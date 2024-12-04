@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\Blog;
 use Illuminate\Http\Request;
 
@@ -12,23 +13,36 @@ class ArticleController extends Controller
      */
     public function index(Blog $blog)
     {
-        dd($blog);
+        $articles = $blog->articles()->latest()->paginate(10);
+       return view('articles.index',['articles'=>$articles,'blog'=>$blog]);
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Blog $blog)
     {
-        //
+        return view('articles.create',['blog'=>$blog]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request,Blog $blog)
     {
-        //
+        $attributes = $request->validate([
+            'title'  => ['required'],
+            'body' =>['required']
+        ]);
+
+        Article::create([
+            'blog_id'=> $blog->id,
+            'title'=>$attributes['title'],
+            'body'=>$attributes['body']
+        ]);
+
+        return redirect('/articles/'.$blog->id);
     }
 
     /**

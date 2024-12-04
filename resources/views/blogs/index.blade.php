@@ -6,11 +6,16 @@
         <a href="/blogs/add" class="flex justify-center mt-10 mb-4 underline">Add a New Blog </a>
 
         <div class="flex justify-center mt-7">
-            <ul >
+            <table >
                 @foreach($blogs as $blog)
-                    <li class="mb-2"><span>{{ $blog->id }}.</span> <span class="px-5">{{ $blog->created_at }}</span> <a href="/blogs/edit/{{ $blog->id }}" class="underline">{{ $blog->subject }}</a></li>
+                    <tr class="mb-2">
+                        <td>{{ $blog->id }}.</td>
+                        <td class="px-5">{{ $blog->created_at }}</td>
+                        <td class="px-5"><a href="/blogs/edit/{{ $blog->id }}" class="underline">{{ $blog->subject }}</a></td>
+                        <td><a href="/articles/{{ $blog->id}}">Manage Articles</a></td>
+                    </tr>
                 @endforeach
-            </ul>
+                </table>
         </div>
 
         <div class="flex justify-center mt-5">

@@ -37,7 +37,8 @@ Route::middleware('auth')->group( function () {
     Route::delete('/blogs/{id}',[BlogController::class,'destroy']);
 
     Route::get('/articles/{blog}',[ArticleController::class,'index']);
-
+    Route::get('/articles/add/{blog}',[ArticleController::class,'create']);
+    Route::post('/articles/{blog}',[ArticleController::class,'store']);
 });
 
 Route::fallback(function () {
