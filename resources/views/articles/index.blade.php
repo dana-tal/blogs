@@ -13,14 +13,20 @@
             @method('DELETE')
             <div class="flex justify-center ">
                 <table >
+                    <thead >
+                        <tr ><th class="px-3 py-3">Select</th><th class="px-3">Category</th> <th class="px-3">Article Id</th><th class="px-3">Created At</th><th class="px-3">Edit</th> </tr>
+                    </thead>
+                    <tbody>
                     @foreach($articles as $article)
                         <tr class="mb-2">
-                            <td><input name="delete_articles[]" id={{ $article->id }} value={{ $article->id }} type="checkbox" /></td>
-                            <td class="px-5">{{ $article->id }}.</td>
-                            <td class="px-5">{{ $article->created_at }}</td>
-                            <td><a href="/articles/edit/{{ $article->id }}" class="underline">{{ $article->title }}</a></td>
+                            <td class="px-3 flex justify-center"><input name="delete_articles[]" id={{ $article->id }} value={{ $article->id }} type="checkbox" /></td>
+                            <td class="px-3">{{ $article->category->name }}</td>
+                            <td class="px-3">{{ $article->id }}.</td>
+                            <td class="px-3">{{ $article->created_at }}</td>
+                            <td class="px-3"><a href="/articles/edit/{{ $article->id }}" class="underline">{{ $article->title }}</a></td>
                         </tr>
                     @endforeach
+                    </tbody>
                 </table>
             </div>
             <input type="hidden" id="blog_id" value="{{ $blog->id }}}" />

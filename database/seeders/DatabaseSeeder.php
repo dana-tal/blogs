@@ -22,13 +22,11 @@ class DatabaseSeeder extends Seeder
             Category::create(['name'=>$cat]);
         }
 
-        User::factory(10)->create();
+        $this->call(UserSeeder::class);
+       // User::factory(10)->create();
         Blog::factory(50)->create();
         Article::factory(500)->create();
 
-       /* User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]); */
+
     }
 }

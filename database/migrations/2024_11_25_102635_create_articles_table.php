@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('articles', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\Blog::class);
+            $table->foreignIdFor(\App\Models\Category::class);
             $table->string('title');
             $table->longText('body');
             $table->timestamps();

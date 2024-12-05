@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Blog;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -13,7 +14,7 @@ class ArticleController extends Controller
      */
     public function index(Blog $blog)
     {
-        $articles = $blog->articles()->latest()->paginate(10);
+        $articles = $blog->articles()->with('category')->latest()->paginate(10);
        return view('articles.index',['articles'=>$articles,'blog'=>$blog]);
     }
 
@@ -23,7 +24,8 @@ class ArticleController extends Controller
      */
     public function create(Blog $blog)
     {
-        return view('articles.create',['blog'=>$blog]);
+        $categories = Category::all();
+        return view('articles.create',['blog'=>$blog,'categories'=>$categories]);
     }
 
     /**
@@ -33,11 +35,13 @@ class ArticleController extends Controller
     {
         $attributes = $request->validate([
             'title'  => ['required'],
+            'category_id'=>['required'],
             'body' =>['required']
         ]);
 
         Article::create([
             'blog_id'=> $blog->id,
+            'category_id'=>$attributes['category_id'],
             'title'=>$attributes['title'],
             'body'=>$attributes['body']
         ]);
@@ -59,7 +63,8 @@ class ArticleController extends Controller
     public function edit(Article $article)
     {
         $blog = $article->blog;
-        return view('articles.edit',['article'=>$article,'blog'=>$blog]);
+        $categories = Category::all();
+        return view('articles.edit',['article'=>$article,'blog'=>$blog,'categories'=>$categories]);
     }
 
     /**
@@ -70,11 +75,13 @@ class ArticleController extends Controller
 
         $attributes = $request->validate([
             'title'  => ['required'],
+            'category_id'=>['required'],
             'body' =>['required'],
         ]);
 
         $article->update([
             'title' => $attributes['title'],
+            'category_id'=>$attributes['category_id'],
             'body' => $attributes['body'],
         ]);
 
@@ -88,21 +95,11 @@ class ArticleController extends Controller
      */
     public function destroy(Request $request, Blog $blog)
     {
-       // dd($request->delete_articles);
 
         if (is_array( $request->delete_articles) && !empty($request->delete_articles))
         {
             Article::whereIn('id', $request->delete_articles)->delete();
         }
         return redirect('/articles/'.$blog->id);
-        /*
-          $blog = Blog::find($id);
-        if ($blog->image)
-        {
-            Storage::delete($blog->image);
-        }
-        $blog->delete();
-        return redirect('/blogs');
-        */
     }
 }

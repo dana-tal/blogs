@@ -15,7 +15,7 @@ Route::get('/', function () {
 Route::middleware('guest')->group( function () { // each of the fallowing routes will go through the guest middleware
     Route::get('/register',[UserController::class,'display_registration_form']);
     Route::post('/register',[UserController::class,'store_registration_info']);
-    Route::get('login',[UserController::class,'display_login_form']);
+    Route::get('login',[UserController::class,'display_login_form'])->name('login');
     Route::post('login',[UserController::class,'perform_login']);
 } );
 
