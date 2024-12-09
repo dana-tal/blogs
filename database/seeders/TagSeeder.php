@@ -2,17 +2,17 @@
 
 namespace Database\Seeders;
 
-use App\Models\Blog;
+use App\Models\Tag;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class BlogSeeder extends Seeder
+class TagSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Blog::factory(50)->create();
+        Tag::factory(50)->create();
     }
 }

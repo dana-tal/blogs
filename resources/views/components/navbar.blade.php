@@ -15,7 +15,7 @@
     @auth
         <div class="space-x-6 font-bold flex">
              <span class="py-3">Hello, {{ Auth::user()->name }}</span>
-             <a href="/manage_blog" class="hover:bg-darkBrown px-3 py-3 rounded-xl">Manage Your Blog</a>
+             <a href="/blogs" class="hover:bg-darkBrown px-3 py-3 rounded-xl">Manage Your Blog</a>
             <form method="POST" action="/logout">
                 @csrf
                 @method('DELETE')

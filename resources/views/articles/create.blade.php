@@ -13,6 +13,7 @@
                     <select>
                 </div>
             </div>
+            <x-forms.input label="Keywords" name="keywords"  type="textarea"   rows="3" />
             <x-forms.input label="Body" name="body"  type="textarea"   rows="20"/>
             <x-forms.button>Create Article</x-forms.button> <span class="px-5"><a href="/articles/{{ $blog->id }}">Back to Blog Articles</a></span>
         </x-forms.form>

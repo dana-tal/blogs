@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Blog;
 use App\Models\Category;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -36,15 +37,19 @@ class ArticleController extends Controller
         $attributes = $request->validate([
             'title'  => ['required'],
             'category_id'=>['required'],
+            'keywords'=>['required'],
             'body' =>['required']
         ]);
 
-        Article::create([
+       $article = Article::create([
             'blog_id'=> $blog->id,
             'category_id'=>$attributes['category_id'],
             'title'=>$attributes['title'],
             'body'=>$attributes['body']
         ]);
+
+        $added_keywords = $this->get_keywords($attributes['keywords']);
+        $this-> add_new_keywords($added_keywords,$article);
 
         return redirect('/articles/'.$blog->id);
     }
@@ -64,7 +69,42 @@ class ArticleController extends Controller
     {
         $blog = $article->blog;
         $categories = Category::all();
-        return view('articles.edit',['article'=>$article,'blog'=>$blog,'categories'=>$categories]);
+        $tags = $article->tags;
+        $tags_arr = array();
+        foreach($tags as $tag)
+        {
+          $tags_arr[] = $tag->name;
+        }
+        $tags_list = implode(" , " ,$tags_arr);
+        return view('articles.edit',['article'=>$article,'blog'=>$blog,'categories'=>$categories,'tags_list'=>$tags_list]);
+    }
+
+
+    protected function add_new_keywords($added_keywords,$article)
+    {
+        foreach($added_keywords as $new_keyword)
+        {
+            $found_tags = Tag::where('name','=',$new_keyword)->get();
+            if (empty($found_tags[0])) // the keywords does not exist in the tags table
+            {
+                $tag = Tag::create(['name'=>$new_keyword]);
+            }
+            else
+            {
+                $tag = $found_tags[0];
+            }
+            $tag->articles()->attach($article->id);
+        }
+    }
+
+    protected function get_keywords($keywords_str)
+    {
+        $list = explode(',',$keywords_str);
+        foreach($list as $item)
+        {
+            $keywords[]= trim($item);
+        }
+        return($keywords);
     }
 
     /**
@@ -76,6 +116,7 @@ class ArticleController extends Controller
         $attributes = $request->validate([
             'title'  => ['required'],
             'category_id'=>['required'],
+            'keywords'=>['required'],
             'body' =>['required'],
         ]);
 
@@ -84,6 +125,38 @@ class ArticleController extends Controller
             'category_id'=>$attributes['category_id'],
             'body' => $attributes['body'],
         ]);
+
+        $tags = $article->tags;
+        $old_keywords = array();
+        $new_keywords = array();
+
+        foreach($tags as $tag)
+        {
+          $old_keywords[] = $tag->name;
+        }
+
+        $new_keywords = $this->get_keywords($attributes['keywords']);
+
+        $added_keywords = array_values(array_diff($new_keywords,$old_keywords));
+        $removed_keywords = array_values(array_diff($old_keywords,$new_keywords));
+
+       if (!empty($added_keywords))
+        {
+            $this->add_new_keywords($added_keywords,$article);
+        }
+
+        if (!empty($removed_keywords))
+        {
+            foreach($removed_keywords as $old_keyword)
+            {
+                $found_tags = Tag::where('name','=',$old_keyword)->get();
+                if (!empty($found_tags[0]))
+                {
+                    $found_tags[0]->articles()->detach($article->id);
+                }
+            }
+        }
+
 
         $blog_id = $article->blog->id;
         return redirect('/articles/'.$blog_id);

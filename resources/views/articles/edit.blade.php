@@ -15,6 +15,8 @@
                     <select>
                 </div>
             </div>
+            <x-forms.input label="Keywords" name="keywords"  type="textarea"   rows="3" value="{{ $tags_list }}"/>
+
             <x-forms.input label="Body" name="body"  type="textarea"   rows="20" value="{{ $article->body }}"/>
             <x-forms.button>Update Article</x-forms.button> <span class="px-5"><a href="/articles/{{ $article->blog->id }}">Back to Blog Articles</a></span>
         </x-forms.form>
