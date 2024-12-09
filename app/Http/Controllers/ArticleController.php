@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Tag;
+use App\Rules\commaSeparatedRule;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -37,7 +38,7 @@ class ArticleController extends Controller
         $attributes = $request->validate([
             'title'  => ['required'],
             'category_id'=>['required'],
-            'keywords'=>['required'],
+            'keywords'=>['required',new commaSeparatedRule()],
             'body' =>['required']
         ]);
 
@@ -102,7 +103,12 @@ class ArticleController extends Controller
         $list = explode(',',$keywords_str);
         foreach($list as $item)
         {
-            $keywords[]= trim($item);
+            $trimmed = trim($item);
+            if (!empty($trimmed))
+            {
+                $keywords[]= $trimmed;
+            }
+
         }
         return($keywords);
     }
@@ -116,7 +122,7 @@ class ArticleController extends Controller
         $attributes = $request->validate([
             'title'  => ['required'],
             'category_id'=>['required'],
-            'keywords'=>['required'],
+            'keywords'=>['required',new commaSeparatedRule()],
             'body' =>['required'],
         ]);
 

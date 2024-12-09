@@ -3,8 +3,8 @@
         <x-page-heading>Edit Blog</x-page-heading>
         <x-forms.form method="POST" action="/blogs/{{ $blog->id}}" enctype="multipart/form-data">
             @method('PATCH')
-            <x-forms.input label="Subject" name="subject" value="{{ $blog->subject }}"/>
-            <x-forms.input label="Description" name="description" type="textarea"  rows="5" value="{{ $blog->description }}"/>
+            <x-forms.input label="Subject" name="subject" value="{{ old('subject',$blog->subject) }}"/>
+            <x-forms.input label="Description" name="description" type="textarea"  rows="5" value="{{ old('description',$blog->description) }}"/>
             <x-forms.input label="Upload Image" name="image" type="file" />
             <div class="flex justify-center" ><img src="{{ asset($blog->image) }}" alt="" class="rounded-xl" width="250"></div>
 

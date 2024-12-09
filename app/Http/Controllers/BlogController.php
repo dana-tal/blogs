@@ -102,17 +102,23 @@ class BlogController extends Controller
                 Storage::delete($blog->image);
             }
             $image_path = $request->image->store('images');
+            $props = [
+                'subject' => $attributes['subject'],
+                'description' => $attributes['description'],
+                'image'=>$image_path
+            ];
         }
         else
         {
             $image_path = null;
+            $props = [
+                'subject' => $attributes['subject'],
+                'description' => $attributes['description']
+            ];
         }
 
-        $blog->update([
-            'subject' => $attributes['subject'],
-            'description' => $attributes['description'],
-            'image'=>$image_path
-        ]);
+
+        $blog->update($props);
 
         return redirect('/blogs');
     }
