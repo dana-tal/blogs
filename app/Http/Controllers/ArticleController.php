@@ -58,9 +58,11 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Article $article)
     {
-        //
+        $tags = $article->tags;
+        $comments = $article->comments;
+        return view('articles.show',['article'=>$article,'tags'=>$tags, 'comments'=>$comments]);
     }
 
     /**

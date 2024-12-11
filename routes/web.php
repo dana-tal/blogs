@@ -7,10 +7,11 @@ use App\Http\Controllers\ManageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[BlogController::class,'show_blogs'] );
 
+Route::get('/front/blogs', [BlogController::class,'show_blogs']);
+Route::get('/front/blog/{blog}/{page_id}',[BlogController::class,'show']);
+Route::get('/front/article/{article}',[ArticleController::class,'show']);
 
 Route::middleware('guest')->group( function () { // each of the fallowing routes will go through the guest middleware
     Route::get('/register',[UserController::class,'display_registration_form']);

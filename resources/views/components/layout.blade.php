@@ -16,8 +16,8 @@
 <body class="bg-antiqueWhite text-brownBear  pb-20">
     @php
      $jobs = new stdClass();
-     $jobs->title = 'Home';
-     $jobs->link  = '/';
+     $jobs->title = 'Blogs';
+     $jobs->link  = '/front/blogs';
 
      $careers = new stdClass();
      $careers->title = 'Careers';

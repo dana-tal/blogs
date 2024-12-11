@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Article;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,18 @@ class CommentFactory extends Factory
      */
     public function definition(): array
     {
+        $article_id = rand(1,500);
+        $article= Article::find($article_id);
+        $owner_id = $article->blog->user->id;
+        do
+        {
+            $user_id = rand(1,10);
+        }while($user_id === $owner_id);
+
+
         return [
-            'article_id'=>rand(1,500),
+            'article_id'=>$article_id,
+            'user_id'=>$user_id,
             'comment'=>fake()->catchPhrase()
         ];
     }

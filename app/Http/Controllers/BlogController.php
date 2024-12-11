@@ -62,9 +62,11 @@ class BlogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Blog $blog,$page_id)
     {
-        //
+       // dd("page_id=".$page_id);
+        $articles = $blog->articles()->paginate(10);
+        return view('blogs.show',['blog'=>$blog,'articles'=>$articles,'page_id'=>$page_id]);
     }
 
     /**
@@ -135,5 +137,12 @@ class BlogController extends Controller
         }
         $blog->delete();
         return redirect('/blogs');
+    }
+
+    public function show_blogs()
+    {
+        $blogs = Blog::with('user')->latest()->paginate(5);
+        //$jobs = Job::with('employer')->get();
+        return view('blogs.front_blogs',['blogs'=>$blogs]);
     }
 }
