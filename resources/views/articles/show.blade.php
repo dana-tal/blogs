@@ -20,7 +20,7 @@
                         <a class="bg-green-600 mx-5 rounded-xl px-3 py-3 hover:bg-green-300">{{ $tag->name }}</a>
                 @endforeach
             </div>
-            <div class="mt-5"><a href="/front/blog/{{ $article->blog->id }}">Back to this Article's blog </a></div>
+            <div class="mt-5"><a href="/front/blog/{{ $article->blog->id }}/{{ $page_id }}">Back to this Article's blog </a></div>
         </div>
     </div>
 </x-layout>

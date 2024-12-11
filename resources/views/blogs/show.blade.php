@@ -9,7 +9,7 @@
                 <div class="text-xl mb-3 font-bold">Articles</div>
                 <ul>
                     @foreach ($articles as $article)
-                        <li class="my-5"><a href="/front/article/{{ $article->id }}">{{ $article->title }}</a></li>
+                        <li class="my-5"><a href="/front/article/{{ $article->id }}/{{ $page_id }}">{{ $article->title }}</a></li>
                     @endforeach
                 </ul>
                 <div class="flex justify-center mt-5">
