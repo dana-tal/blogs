@@ -19,7 +19,8 @@ export default {
                 "camelBrown":"#C19A6B",
                 "brownBear":"#835C3B",
                 "antiqueWhite":"#FAEBD7",
-                "darkBrown":"#654321"
+                "darkBrown":"#654321",
+                "tan":"#D2B48C"
             },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],

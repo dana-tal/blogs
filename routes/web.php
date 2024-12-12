@@ -3,6 +3,7 @@
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ManageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -11,7 +12,9 @@ Route::get('/',[BlogController::class,'show_blogs'] );
 
 Route::get('/front/blogs', [BlogController::class,'show_blogs']);
 Route::get('/front/blog/{blog}/{page_id}',[BlogController::class,'show']);
-Route::get('/front/article/{article}/{page_id}',[ArticleController::class,'show']);
+Route::get('/front/article/{article}/{page_id}/{parent?}',[ArticleController::class,'show']);
+Route::post('/front/add_comment',[CommentController::class,'store']);
+Route::get('/front/articles',[ArticleController::class,'show_articles']);
 
 Route::middleware('guest')->group( function () { // each of the fallowing routes will go through the guest middleware
     Route::get('/register',[UserController::class,'display_registration_form']);

@@ -1,6 +1,8 @@
 @props(['label', 'name', 'size'=>''])
 
 @php
+
+
     $width='w-full';
     if ($size==='small')
     {

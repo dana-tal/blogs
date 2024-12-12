@@ -6,6 +6,25 @@
             <div>Cagetory: {{ $article->category->name }}</div>
 
             <div class="mt-5 mb-5">{{ $article->body }}</div>
+
+
+            <div>
+                @auth
+                    <form method="POST" action="/front/add_comment">
+                        @csrf
+                        <div class="flex flex-row mb-3  ">
+                            <div ><label class="font-bold" for="comment">Comment:</label></div>
+                            <input type="text" name="comment" value="{{ old('comment') }}" class="ml-5 w-2/5" />
+                        </div>
+                        <x-forms.error :error="$errors->first('comment')" class="mb-2"/>
+                        <x-forms.input label=""  type="hidden" name="user_id" value="{{  Auth::user()->id }}" />
+                        <x-forms.input label="" type="hidden" name="page_id" value="{{ $page_id }}" />
+                        <x-forms.input label="" type="hidden" name="article_id" value="{{ $article->id }}" />
+                        <x-forms.button class="mb-5">Add Comment</x-forms.button>
+                    </form>
+                @endauth
+            </div>
+
             @if ( count($comments) >0)
                 <div class="font bold text-l underline">Comments</div>
                 <ul>
@@ -20,7 +39,11 @@
                         <a class="bg-green-600 mx-5 rounded-xl px-3 py-3 hover:bg-green-300">{{ $tag->name }}</a>
                 @endforeach
             </div>
-            <div class="mt-5"><a href="/front/blog/{{ $article->blog->id }}/{{ $page_id }}">Back to this Article's blog </a></div>
+            @if ($parent==='blogs')
+                <div class="mt-5"><a href="/front/blog/{{ $article->blog->id }}/{{ $page_id }}">Back to this Article's blog </a></div>
+            @else
+                <div class="mt-5"><a href="/front/articles?page={{ $page_id }}">Back to Articles </a></div>
+            @endif
         </div>
     </div>
 </x-layout>

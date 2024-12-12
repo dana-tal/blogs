@@ -20,6 +20,11 @@ class ArticleController extends Controller
        return view('articles.index',['articles'=>$articles,'blog'=>$blog]);
     }
 
+    public function show_articles()
+    {
+        $articles = Article::with('category','blog')->latest()->paginate(10);
+        return view ('articles.show_articles',['articles'=>$articles]);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -58,11 +63,11 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Article $article,$page_id)
+    public function show(Article $article,string $page_id,?string $parent='blogs')
     {
         $tags = $article->tags;
-        $comments = $article->comments;
-        return view('articles.show',['article'=>$article,'tags'=>$tags, 'comments'=>$comments,'page_id'=>$page_id]);
+        $comments = $article->comments()->latest()->get();
+        return view('articles.show',['article'=>$article,'tags'=>$tags, 'comments'=>$comments,'page_id'=>$page_id, 'parent'=>$parent]);
     }
 
     /**

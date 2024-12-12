@@ -15,20 +15,17 @@
 </head>
 <body class="bg-antiqueWhite text-brownBear  pb-20">
     @php
-     $jobs = new stdClass();
-     $jobs->title = 'Blogs';
-     $jobs->link  = '/front/blogs';
+     $item1 = new stdClass();
+     $item1->title = 'Blogs';
+     $item1->link  = '/front/blogs';
 
-     $careers = new stdClass();
-     $careers->title = 'Careers';
-     $careers->link  = '/careers';
+     $item2 = new stdClass();
+     $item2->title = 'Articles';
+     $item2->link  = '/front/articles';
 
-     $salaries = new stdClass();
-     $salaries->title = 'Salaries';
-     $salaries->link  = '/salaries';
     @endphp
     <div class="px-10">
-        <x-navbar :links="[$jobs,$careers,$salaries]"/>
+        <x-navbar :links="[$item1,$item2]"/>
         <main class="mt-10 max-w-[986px] mx-auto">
             {{ $slot }}
         </main>
