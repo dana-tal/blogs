@@ -1,3 +1,14 @@
+@php
+    $blog_q = session('blog_q')??'';
+    if (empty($blog_q))
+    {
+        $back_url = "/front/blogs?page=".$page_id;
+    }
+    else {
+        $back_url = "/front/blogs/search?q=".$blog_q."&page=".$page_id;
+    }
+@endphp
+
 <x-layout>
     <div class="flex justify-center ">
 
@@ -15,7 +26,7 @@
                 <div class="flex justify-center mt-5">
                     {{ $articles->links() }}
                 </div>
-                <div class="mt-5"><a href="/front/blogs?page={{ $page_id }}">Back to blogs page</a></div>
+                <div class="mt-5"><a href="{{ $back_url }}">Back to blogs page</a></div>
             </div>
         </div>
 

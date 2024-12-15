@@ -20,6 +20,13 @@ class BlogController extends Controller
         return view('blogs.index',['blogs'=>$blogs]);
     }
 
+    public function search()
+    {
+        $blog_q = request('q');
+        session(['blog_q'=>$blog_q]);
+        $blogs = Blog::query()->where('subject','LIKE','%'.$blog_q.'%')->orWhere('description','LIKE','%'.$blog_q.'%')->paginate(5);
+        return view('blogs.front_blogs',['blogs'=>$blogs]);
+    }
     /**
      * Show the form for creating a new resource.
      */
@@ -142,7 +149,8 @@ class BlogController extends Controller
     public function show_blogs()
     {
         $blogs = Blog::with('user')->latest()->paginate(5);
+        session(['blog_q'=>'']);
         //$jobs = Job::with('employer')->get();
-        return view('blogs.front_blogs',['blogs'=>$blogs]);
+        return view('blogs.front_blogs',['blogs'=>$blogs,'old_q'=>'']);
     }
 }

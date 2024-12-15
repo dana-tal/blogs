@@ -12,9 +12,12 @@ Route::get('/',[BlogController::class,'show_blogs'] );
 
 Route::get('/front/blogs', [BlogController::class,'show_blogs']);
 Route::get('/front/blog/{blog}/{page_id}',[BlogController::class,'show']);
+Route::get('/front/blogs/search/',[BlogController::class,'search']);
 Route::get('/front/article/{article}/{page_id}/{parent?}',[ArticleController::class,'show']);
 Route::post('/front/add_comment',[CommentController::class,'store']);
 Route::get('/front/articles',[ArticleController::class,'show_articles']);
+
+//Route::get('/search',SearchController::class);
 
 Route::middleware('guest')->group( function () { // each of the fallowing routes will go through the guest middleware
     Route::get('/register',[UserController::class,'display_registration_form']);
