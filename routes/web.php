@@ -16,6 +16,7 @@ Route::get('/front/blogs/search/',[BlogController::class,'search']);
 Route::get('/front/article/{article}/{page_id}/{parent?}',[ArticleController::class,'show']);
 Route::post('/front/add_comment',[CommentController::class,'store']);
 Route::get('/front/articles',[ArticleController::class,'show_articles']);
+Route::get('/front/articles/search/',[ArticleController::class,'search']);
 
 //Route::get('/search',SearchController::class);
 

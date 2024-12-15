@@ -20,10 +20,46 @@ class ArticleController extends Controller
        return view('articles.index',['articles'=>$articles,'blog'=>$blog]);
     }
 
+    public function search()
+    {
+        $article_q = request('q');
+        session(['article_q'=>$article_q]);
+        $cat = request('cat');
+        session(['cat'=>$cat]);
+
+        $categories =  Category::all();
+
+        if (empty($cat) && !empty($article_q))
+        {
+            $articles =  Article::query()->with('category','blog')->where('title','LIKE','%'.$article_q.'%')->orWhere('body','LIKE','%'.$article_q.'%')->paginate(10);
+        }
+        else if (!empty($cat) && empty($article_q))
+        {
+            $articles = Article::query()->with('category','blog')->where('category_id','=',$cat)->paginate(10);
+        }
+        else if (!empty($cat) && !empty($article_q))
+        {
+            $articles = Article::query()->with('category','blog')->where('category_id','=',$cat)
+            ->where(function($query) use ($article_q){
+                $query->where('title','LIKE','%'.$article_q.'%')->orWhere('body','LIKE','%'.$article_q.'%');
+           })->paginate(10);
+        }
+        else // no q and no cat , get all articles
+        {
+           return redirect('/front/articles');
+        }
+
+        return view ('articles.show_articles',['articles'=>$articles,'categories'=>$categories]);
+    }
+
     public function show_articles()
     {
+        session(['article_q'=>'']);
+        session(['cat'=>'']);
+
+        $categories =  Category::all();
         $articles = Article::with('category','blog')->latest()->paginate(10);
-        return view ('articles.show_articles',['articles'=>$articles]);
+        return view ('articles.show_articles',['articles'=>$articles,'categories'=>$categories]);
     }
 
     /**

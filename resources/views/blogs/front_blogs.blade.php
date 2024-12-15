@@ -10,7 +10,7 @@
                         <x-forms.input label="Search" name="q" placeholder="Technology..."  value="{{ $blog_q }}"/>
                     </x-forms.form>
 
-                    <ul>
+                    <ul >
                         @foreach ($blogs as $blog)
                             <li class="mb-2">
                                 <x-card_wide :$blog :page="$blogs->currentPage()"/>

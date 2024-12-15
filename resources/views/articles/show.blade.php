@@ -1,3 +1,30 @@
+
+@php
+    $article_q = session('article_q')??'';
+    $cat = session('cat')??'';
+
+    $back_url = "/front/articles";
+    $params = array();
+    if (!empty($article_q))
+    {
+        $params[] = "q=".$article_q;
+    }
+    if (!empty($cat))
+    {
+        $params[] = "cat=".$cat;
+    }
+    if(!empty($params))
+    {
+        $back_url .= '/search?';
+        $query_str = implode('&',$params);
+        $back_url .= $query_str;
+        $back_url .="&page=".$page_id;
+    }
+    else {
+         $back_url .= "?page=".$page_id;
+    }
+@endphp
+
 <x-layout>
     <div class="flex justify-center ">
         <div class="grid grid-col-1">
@@ -42,7 +69,7 @@
             @if ($parent==='blogs')
                 <div class="mt-5"><a href="/front/blog/{{ $article->blog->id }}/{{ $page_id }}">Back to this Article's blog </a></div>
             @else
-                <div class="mt-5"><a href="/front/articles?page={{ $page_id }}">Back to Articles </a></div>
+                <div class="mt-5"><a href="{{ $back_url }}">Back to Articles </a></div>
             @endif
         </div>
     </div>

@@ -1,8 +1,8 @@
-@props(['article','page_id'])
+@props(['article','page_id','article_ind'])
 
 @php
 
-  $bg_color = $article->id %2===0 ? 'bg-camelBrown':'bg-tan';
+  $bg_color = $article_ind %2===0 ? 'bg-camelBrown':'bg-tan';
 
 @endphp
 
