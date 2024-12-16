@@ -11,6 +11,8 @@
     <a href="{{ $link->link }}" class="hover:bg-darkBrown px-3 py-3 rounded-xl">{{$link->title}}</a>
     @endforeach
 
+
+
   </div>
     @auth
         <div class="space-x-6 font-bold flex">

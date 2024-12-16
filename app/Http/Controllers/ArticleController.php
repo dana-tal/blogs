@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Tag;
 use App\Rules\commaSeparatedRule;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ArticleController extends Controller
 {
@@ -29,20 +30,32 @@ class ArticleController extends Controller
 
         $categories =  Category::all();
 
-        if (empty($cat) && !empty($article_q))
+        if (empty($cat) && !empty($article_q)) // only q supplied
         {
-            $articles =  Article::query()->with('category','blog')->where('title','LIKE','%'.$article_q.'%')->orWhere('body','LIKE','%'.$article_q.'%')->paginate(10);
+            $articles =  Article::query()->with(['category','blog'])
+            ->where('articles.title','LIKE','%'.$article_q.'%')
+            ->orWhere('articles.body','LIKE','%'.$article_q.'%')
+            ->orWhereHas('tags', function ($rel) use($article_q) {
+                $rel->where('tags.name','LIKE','%'.$article_q.'%');
+            })
+            ->paginate(10);
         }
-        else if (!empty($cat) && empty($article_q))
+        else if (!empty($cat) && empty($article_q)) // only cat supplied
         {
-            $articles = Article::query()->with('category','blog')->where('category_id','=',$cat)->paginate(10);
+            $articles = Article::query()->with('category','blog')
+            ->where('category_id','=',$cat)->paginate(10);
         }
-        else if (!empty($cat) && !empty($article_q))
+        else if (!empty($cat) && !empty($article_q)) // both category and q supplied
         {
-            $articles = Article::query()->with('category','blog')->where('category_id','=',$cat)
-            ->where(function($query) use ($article_q){
-                $query->where('title','LIKE','%'.$article_q.'%')->orWhere('body','LIKE','%'.$article_q.'%');
-           })->paginate(10);
+            $articles = Article::query()->with('category','blog')
+            ->where('category_id','=',$cat)
+            ->where(function($query) use ($article_q)
+                {
+                    $query->where('title','LIKE','%'.$article_q.'%')->orWhere('body','LIKE','%'.$article_q.'%')
+                    ->orWhereHas('tags',function ($rel) use($article_q) {
+                        $rel->where('tags.name','LIKE','%'.$article_q.'%');
+                    });
+                })->paginate(10);
         }
         else // no q and no cat , get all articles
         {
