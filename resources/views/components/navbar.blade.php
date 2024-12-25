@@ -35,14 +35,14 @@
               </span>
             </button>
             <ul
-              class="absolute z-[1000] float-left m-0 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-white bg-clip-padding text-base shadow-lg data-[twe-dropdown-show]:block dark:bg-surface-dark"
+              class="w-full absolute z-[1000] float-left m-0 hidden min-w-max list-none overflow-hidden rounded-lg border-none bg-orange-100 bg-clip-padding text-base shadow-lg data-[twe-dropdown-show]:block dark:bg-surface-dark"
               aria-labelledby="dropdownMenuButton1"
               data-twe-dropdown-menu-ref>
 
                 @foreach($lay_categories as $cat)
                     <li >
                         <a
-                        class="block w-full whitespace-nowrap bg-white px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-zinc-200/60 focus:bg-zinc-200/60 focus:outline-none active:bg-zinc-200/60 active:no-underline dark:bg-surface-dark dark:text-white dark:hover:bg-neutral-800/25 dark:focus:bg-neutral-800/25 dark:active:bg-neutral-800/25"
+                        class="text-center block w-full whitespace-nowrap bg-orange-100 px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-deerBrown focus:bg-zinc-200/60 focus:outline-none active:bg-zinc-200/60 active:no-underline dark:bg-surface-dark dark:text-white dark:hover:bg-neutral-800/25 dark:focus:bg-neutral-800/25 dark:active:bg-neutral-800/25"
                         href="/front/articles/search?q=&cat={{ $cat->id }}"
                         data-twe-dropdown-item-ref
                         >

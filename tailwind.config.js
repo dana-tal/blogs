@@ -20,7 +20,9 @@ export default {
                 "brownBear":"#835C3B",
                 "antiqueWhite":"#FAEBD7",
                 "darkBrown":"#654321",
-                "tan":"#D2B48C"
+                "tan":"#D2B48C",
+                "frenchBeige":"#C8AD7F",
+                "deerBrown":"#E6BF83"
             },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
