@@ -39,7 +39,6 @@
                             <x-sidebar_li  link="/categories" :active="request()->is('categories')">Manage Categories</x-sidebar_li>
                             <x-sidebar_li  link="/tags" :active="request()->is('tags')">Manage Tags</x-sidebar_li>
                             <x-sidebar_li  link="/articles" :active="request()->is('articles')">Manage Articles</x-sidebar_li>
-                            <x-sidebar_li  link="/images" :active="request()->is('images')">Manage Images</x-sidebar_li>
                         </ul>
                     </div>
                 </div>
