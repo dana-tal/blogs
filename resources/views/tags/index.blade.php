@@ -3,7 +3,7 @@
 
         <div class="flex justify-center">
             <h1 class="text-xl font-bold ">Tags Page</h1>
-            <x-forms.button form="delete-form" class="bg-red-600 mx-5 px-5 text-white font-bold rounded">Delete</x-forms.button>
+
         </div>
 
         <form method="POST" action="/tags" id="delete-form" >
@@ -22,7 +22,7 @@
         </form>
 
         <div class="flex justify-center mt-5">
-            {{ $tags->links() }}
+            <x-forms.button form="delete-form" class="bg-red-600 mx-5 px-5 text-white font-bold rounded">Delete</x-forms.button>   {{ $tags->links() }}
         </div>
 
 

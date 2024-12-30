@@ -32,11 +32,11 @@ Route::middleware('guest')->group( function () { // each of the fallowing routes
 Route::middleware('auth')->group( function () {
     Route::delete('logout',[UserController::class,'perform_logout']);
     Route::get('manage_blog',[ManageController::class,'index']);
-    Route::get('/categories',[CategoryController::class,'index']);
-    Route::get('/categories/add',[CategoryController::class,'create']);
-    Route::post('/categories',[CategoryController::class,'store']);
-    Route::get('/categories/edit/{id}',[CategoryController::class,'edit']);
-    Route::patch('/categories/{id}',[CategoryController::class,'update']);
+    Route::get('/categories',[CategoryController::class,'index'])->can('viewAny',App\Models\Category::class);
+    Route::get('/categories/add',[CategoryController::class,'create'])->can('create',App\Models\Category::class);
+    Route::post('/categories',[CategoryController::class,'store'])->can('store',App\Models\Category::class);
+    Route::get('/categories/edit/{cat}',[CategoryController::class,'edit'])->can('edit','cat');
+    Route::patch('/categories/{cat}',[CategoryController::class,'update'])->can('update','cat');
 
     Route::get('/tags',[TagController::class,'index'])->can('viewAny',App\Models\Tag::class);
     Route::get('/tags/edit/{tag}',[TagController::class,'edit'])->can('edit', 'tag');
