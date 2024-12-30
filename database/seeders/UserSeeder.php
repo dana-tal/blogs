@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
             'email' => 'dana@gmail.com',
             'email_verified_at' => now(),
             'password' => bcrypt('123456'), /* static::$password ??= Hash::make('password'), */
+            'is_admin' => true,
             'remember_token' => Str::random(10),
         ]);
         User::create([

@@ -36,8 +36,14 @@
                     <div class="flex justify-center mt-4 font-bold text-white">
                         <ul >
                             <x-sidebar_li  link="/blogs" :active="request()->is('blogs')">Manage Blogs</x-sidebar_li>
-                            <x-sidebar_li  link="/categories" :active="request()->is('categories')">Manage Categories</x-sidebar_li>
-                            <x-sidebar_li  link="/tags" :active="request()->is('tags')">Manage Tags</x-sidebar_li>
+                            @if( Auth::user()->is_admin)
+                                <x-sidebar_li  link="/categories" :active="request()->is('categories')">Manage Categories</x-sidebar_li>
+                            @endif
+
+                            @can('viewAny',App\Models\Tag::class)
+                                <x-sidebar_li  link="/tags" :active="request()->is('tags')">Manage Tags</x-sidebar_li>
+                            @endcan
+
                             <x-sidebar_li  link="/articles" :active="request()->is('articles')">Manage Articles</x-sidebar_li>
                         </ul>
                     </div>

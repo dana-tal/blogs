@@ -16,6 +16,7 @@ class BlogController extends Controller
      */
     public function index()
     {
+       // dd(Auth::user()->is_admin);
         $blogs = Blog::where('user_id',Auth::user()->id)->latest()->paginate(10);
         return view('blogs.index',['blogs'=>$blogs]);
     }

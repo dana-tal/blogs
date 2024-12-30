@@ -5,6 +5,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ManageController;
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,12 @@ Route::middleware('auth')->group( function () {
     Route::post('/categories',[CategoryController::class,'store']);
     Route::get('/categories/edit/{id}',[CategoryController::class,'edit']);
     Route::patch('/categories/{id}',[CategoryController::class,'update']);
+
+    Route::get('/tags',[TagController::class,'index'])->can('viewAny',App\Models\Tag::class);
+    Route::get('/tags/edit/{tag}',[TagController::class,'edit'])->can('edit', 'tag');
+    Route::patch('/tags/{tag}',[TagController::class,'update'])->can('update','tag');
+    Route::delete('/tags',[TagController::class,'destroy'])->can('delete',App\Models\Tag::class);
+
 
     Route::get('/blogs',[BlogController::class,'index']);
     Route::get('/blogs/add',[BlogController::class,'create']);
