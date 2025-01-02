@@ -41,10 +41,24 @@
                             @endcan
 
                             @can('viewAny',App\Models\Tag::class)
-                                <x-sidebar_li  link="/tags" :active="request()->is('tags')">Manage Tags</x-sidebar_li>
+                                <x-sidebar_li   link="/tags" :active="request()->is('tags')">Manage Tags</x-sidebar_li>
                             @endcan
 
-                            <x-sidebar_li  link="/articles" :active="request()->is('articles')">Manage Articles</x-sidebar_li>
+
+                            <x-sidebar_li link="#" mb="mb-0">
+                                <button type="button" id="manage">Manage Articles </button>
+                            </x-sidebar_li >
+                            <ul id="blogs_list" class="list-disc mx-auto ms-12 w-60 justify-center mt-0 hidden">
+                                @foreach(Auth::user()->blogs as $blog)
+                                    <li><a href="/articles/{{$blog->id}}" class="hover:bg-brownBear">{{ $blog->subject }}</a></li>
+                                @endforeach
+                            </ul>
+
+
+
+
+
+
                         </ul>
                     </div>
                 </div>
@@ -59,4 +73,15 @@
         </main>
     </div>
 </body>
+<script type="module">
+    $(document).ready(function(){
+        console.log("in document ready");
+
+
+        $("#manage").click(function(){
+
+            $('#blogs_list').toggle();
+        });
+    });
+</script>
 </html>
