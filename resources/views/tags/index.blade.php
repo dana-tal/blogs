@@ -22,9 +22,40 @@
         </form>
 
         <div class="flex justify-center mt-5">
-            <x-forms.button form="delete-form" class="bg-red-600 mx-5 px-5 text-white font-bold rounded">Delete</x-forms.button>   {{ $tags->links() }}
+            <x-forms.button type="button" id="delete_button" class="bg-red-600 mx-5 px-5 text-white font-bold rounded">Delete</x-forms.button>   {{ $tags->links() }}
         </div>
 
 
     </div>
+
+
+    <script type="module">
+        $("#delete_button").click(function(){
+
+           let text='';
+           let all_checked = [];
+
+           $('input[name="tags[]"]:checked').each(function () {
+              all_checked.push( $(this).val());
+            });
+
+            let all_checked_str = "";
+           if (all_checked.length >0 )
+           {
+                all_checked_str = all_checked.join(",");
+                text = "Are you sure you want to delete "+all_checked_str+" ? Press O.K or Cancel ";
+                if (confirm(text) == true )
+                {
+                    $('#delete-form').submit();
+                }
+           }
+           else
+            {
+                alert("Please select tags to delete");
+            }
+
+
+        });
+    </script>
+
 </x-admin_layout>

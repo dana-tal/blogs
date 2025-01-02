@@ -74,14 +74,9 @@
     </div>
 </body>
 <script type="module">
-    $(document).ready(function(){
-        console.log("in document ready");
-
-
         $("#manage").click(function(){
 
             $('#blogs_list').toggle();
         });
-    });
 </script>
 </html>

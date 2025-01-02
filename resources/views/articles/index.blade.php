@@ -45,7 +45,7 @@
            let text='';
            let all_checked = [];
 
-           $('input[type=checkbox]:checked').each(function () {
+           $('input[name="delete_articles[]"]:checked').each(function () {
               all_checked.push( $(this).val());
             });
 
