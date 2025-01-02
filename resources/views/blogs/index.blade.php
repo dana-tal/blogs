@@ -12,7 +12,7 @@
                         <td>{{ $blog->id }}.</td>
                         <td class="px-5">{{ $blog->created_at }}</td>
                         <td class="px-5"><a href="/blogs/edit/{{ $blog->id }}" class="underline">{{ $blog->subject }}</a></td>
-                        <td><a href="/articles/{{ $blog->id}}">Manage Articles</a></td>
+                        <td><a class="underline" href="/articles/{{ $blog->id}}">Manage Articles</a></td>
                     </tr>
                 @endforeach
                 </table>

@@ -47,9 +47,9 @@ Route::middleware('auth')->group( function () {
     Route::get('/blogs',[BlogController::class,'index']);
     Route::get('/blogs/add',[BlogController::class,'create']);
     Route::post('/blogs',[BlogController::class,'store']);
-    Route::get('/blogs/edit/{id}',[BlogController::class,'edit']);
-    Route::patch('/blogs/{id}',[BlogController::class,'update']);
-    Route::delete('/blogs/{id}',[BlogController::class,'destroy']);
+    Route::get('/blogs/edit/{blog}',[BlogController::class,'edit'])->can('edit','blog');
+    Route::patch('/blogs/{blog}',[BlogController::class,'update'])->can('update','blog');
+    Route::delete('/blogs/{blog}',[BlogController::class,'destroy'])->can('delete','blog');
 
     Route::get('/articles/{blog}',[ArticleController::class,'index']);
     Route::get('/articles/add/{blog}',[ArticleController::class,'create']);

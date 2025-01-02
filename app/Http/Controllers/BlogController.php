@@ -80,16 +80,16 @@ class BlogController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Blog $blog)
     {
-        $blog = Blog::find($id);
+       // $blog = Blog::find($id);
         return view('blogs.edit',['blog'=>$blog]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Blog $blog)
     {
         // get the original filename
         // $file = $request->file('image');
@@ -104,7 +104,7 @@ class BlogController extends Controller
             'image' => ['image','max:2048','unique:blogs,image',File::types(['png', 'jpg', 'jpeg','gif'])]
         ]);
 
-        $blog = Blog::find($id);
+       // $blog = Blog::find($id);
         if ($request->image)
         {
             if ( $blog->image)
@@ -136,10 +136,9 @@ class BlogController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Blog $blog)
     {
-        $blog = Blog::find($id);
-        if ($blog->image)
+       if ($blog->image)
         {
             Storage::delete($blog->image);
         }

@@ -63,7 +63,7 @@
 
             <div class="flex justify-center mt-5">
                 @foreach($tags as $tag)
-                        <a class="bg-green-600 mx-5 rounded-xl px-3 py-3 hover:bg-green-300">{{ $tag->name }}</a>
+                        <a href="/front/articles/search?q={{ $tag->name}}"  class="bg-green-600 mx-5 rounded-xl px-3 py-3 hover:bg-green-300">{{ $tag->name }}</a>
                 @endforeach
             </div>
             @if ($parent==='blogs')
