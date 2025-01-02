@@ -14,11 +14,13 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        $admin_pass = env('ADMIN_PASS');
+        $test_pass = env('TEST_PASS');
         User::create([
             'name' => 'Dana Tal',
             'email' => 'dana@gmail.com',
             'email_verified_at' => now(),
-            'password' => bcrypt('123456'), /* static::$password ??= Hash::make('password'), */
+            'password' => bcrypt($admin_pass), /* static::$password ??= Hash::make('password'), */
             'is_admin' => true,
             'remember_token' => Str::random(10),
         ]);
@@ -26,7 +28,7 @@ class UserSeeder extends Seeder
             'name' => 'Test Test',
             'email' => 'test@gmail.com',
             'email_verified_at' => now(),
-            'password' => bcrypt('123456'),
+            'password' => bcrypt($test_pass),
             'remember_token' => Str::random(10),
         ]);
         User::factory(8)->create();
