@@ -19,7 +19,7 @@
                             @foreach($categories as $category)
                                 <option value="{{ $category->id }}" {{ old('category_id',$cat)==$category->id ? 'selected':'' }}>{{ $category->name }}</option>
                             @endforeach
-                        <select>
+                        </select>
                     </div>
                 </div>
                 <x-forms.button type="submit">Submit</x-forms.button>

@@ -38,4 +38,38 @@ class Article extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public static function remove_article($id)
+    {
+        $article = Article::find($id);
+        $article_tags = $article->tags;
+
+        foreach($article_tags as $tag)
+        {
+            $articles_num = $tag->articles->count();
+            if ($articles_num === 1)
+            {
+                $tag->delete();
+            }
+        }
+        $article->tags()->detach();
+        $article->comments()->delete();
+        $article->delete();
+    }
+
+    public function delete_article()
+    {
+        $article_tags = $this->tags;
+        foreach($article_tags as $tag)
+        {
+            $articles_num = $tag->articles->count();
+            if ($articles_num === 1)
+            {
+                $tag->delete();
+            }
+        }
+        $this->tags()->detach();
+        $this->comments()->delete();
+        $this->delete();
+    }
 }

@@ -10,7 +10,7 @@
 
             <div class="mt-6 flex flex-row justify-between ">
                 <div >
-                    <x-forms.button form="delete-form" bgColor="bg-red-800" class=" text-sm font-bold">Delete</x-forms.button>
+                    <x-forms.button type="button" id="delete_button" bgColor="bg-red-800" class=" text-sm font-bold">Delete</x-forms.button>
                 </div>
 
                 <div class="flex flex-row justify-evenly">
@@ -27,6 +27,26 @@
             <!-- <x-forms.button>Update Blog</x-forms.button> -->
         </x-forms.form>
     </div>
+
+    <script type="module">
+        $("#delete_button").click(function(){
+
+            let text = "Are you sure you want to delete this blog (all related articles will be also deleted) ?  Press O.K or Cancel ";
+            console.log(text);
+            if (confirm(text) == true )
+            {
+                    $('#delete-form').submit();
+            }
+            else
+            {
+                console.log("in else");
+            }
+            console.log("after if");
+
+        });
+    </script>
+
+
 </x-admin_layout>
 
 <form method="POST" action="/blogs/{{ $blog->id}}" id="delete-form" class="hidden">

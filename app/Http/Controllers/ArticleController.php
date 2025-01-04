@@ -233,7 +233,11 @@ class ArticleController extends Controller
 
         if (is_array( $request->delete_articles) && !empty($request->delete_articles))
         {
-            Article::whereIn('id', $request->delete_articles)->delete();
+            foreach( $request->delete_articles as $article_id)
+            {
+                Article::remove_article($article_id);
+            }
+           // Article::whereIn('id', $request->delete_articles)->delete();
         }
         return redirect('/articles/'.$blog->id);
     }

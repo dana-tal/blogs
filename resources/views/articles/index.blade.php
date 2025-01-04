@@ -53,7 +53,7 @@
            if (all_checked.length >0 )
            {
                 all_checked_str = all_checked.join(",");
-                text = "Are you sure you want to delete "+all_checked_str+" ? Press O.K or Cancel ";
+                text = "Are you sure you want to delete "+all_checked_str+"  ? Press O.K or Cancel ";
                 if (confirm(text) == true )
                 {
                     $('#delete-form').submit();

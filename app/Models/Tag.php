@@ -20,4 +20,12 @@ class Tag extends Model
         return $this->belongsToMany(Article::class);
     }
 
+    public static function remove_tag(Tag $tag)
+    {
+        $tag->articles()->detach();  // remove all related entries in article_tag table
+        $tag->delete();  // remove the tag entry from tags table
+    }
+
+
+
 }

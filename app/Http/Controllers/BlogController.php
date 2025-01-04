@@ -142,6 +142,10 @@ class BlogController extends Controller
         {
             Storage::delete($blog->image);
         }
+        foreach($blog->articles as $article)
+        {
+            $article->delete_article();
+        }
         $blog->delete();
         return redirect('/blogs');
     }

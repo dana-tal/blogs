@@ -54,8 +54,7 @@ class TagController extends Controller
         foreach($tag_ids as $tag_id)
         {
             $tag = Tag::find($tag_id);
-            $tag->articles()->detach();  // remove all related entries in article_tag table
-            $tag->delete();             // remove the tag entry from tags table
+            Tag::remove_tag($tag);
         }
         return redirect('/tags');
     }
