@@ -1,7 +1,7 @@
 <x-admin_layout>
     <div class="grid grid-cols-1 w-full">
         <x-page-heading>Edit Article</x-page-heading>
-        <x-forms.form method="POST" action="/articles/{{ $article->id }}" class="w-full">
+        <x-forms.form method="POST" action="{{ env('APP_URL') }}/articles/{{ $article->id }}" class="w-full">
             @method('PATCH')
             <x-forms.input label="Title" name="title" value="{{old('title',$article->title) }}" />
 
@@ -18,7 +18,7 @@
             <x-forms.input label="Keywords" name="keywords"  type="textarea"   rows="3" value="{{old('keywords', $tags_list) }}"/>
 
             <x-forms.input label="Body" name="body"  type="textarea"   rows="20" value="{{ old('body',$article->body) }}"/>
-            <x-forms.button>Update Article</x-forms.button> <span class="px-5"><a href="/articles/{{ $article->blog->id }}">Back to Blog Articles</a></span>
+            <x-forms.button>Update Article</x-forms.button> <span class="px-5"><a href="{{ env('APP_URL') }}/articles/{{ $article->blog->id }}">Back to Blog Articles</a></span>
         </x-forms.form>
     </div>
 </x-admin_layout>

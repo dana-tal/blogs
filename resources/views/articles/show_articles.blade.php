@@ -9,7 +9,7 @@
         <div class="grid grid-cols-1 w-full ">
             <h1 class="mb-2 flex justify-center text-3xl font-bold text-green-700">Newest Articles</h1>
 
-            <x-forms.form action="/front/articles/search" class="mt-6 mb-6 w-full">
+            <x-forms.form action="{{ env('APP_URL') }}/front/articles/search" class="mt-6 mb-6 w-full">
                 <x-forms.input label="Search" name="q" placeholder="Info..."  value="{{ $article_q }}"/>
                 <div class="grid grid-cols-5 gap-3">
                     <span ><label class="font-bold" for="cat_id">Category:</label></span>

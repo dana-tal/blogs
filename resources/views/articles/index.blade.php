@@ -4,11 +4,11 @@
         <h1 class="text-xl font-bold flex justify-center">{{ $blog->subject }} - Articles </h1>
 
         <div class="flex flex-cols-2 gap-16 mt-10 mb-4 justify-center">
-            <a href="/blogs" class="underline">Blogs</a>
-            <a href="/articles/add/{{ $blog->id }}" class="underline">Add a New Article </a>
+            <a href="{{ env('APP_URL') }}/blogs" class="underline">Manage Blogs</a>
+            <a href="{{ env('APP_URL') }}/articles/add/{{ $blog->id }}" class="underline">Add a New Article </a>
         </div>
 
-        <form method="POST" action="/articles/{{ $blog->id}}" id="delete-form" >
+        <form method="POST" action="{{ env('APP_URL') }}/articles/{{ $blog->id}}" id="delete-form" >
             @csrf
             @method('DELETE')
             <div class="flex justify-center ">
@@ -23,7 +23,7 @@
                             <td class="px-3">{{ $article->category->name }}</td>
                             <td class="px-3">{{ $article->id }}.</td>
                             <td class="px-3">{{ $article->created_at }}</td>
-                            <td class="px-3"><a href="/articles/edit/{{ $article->id }}" class="underline">{{ $article->title }}</a></td>
+                            <td class="px-3"><a href="{{ env('APP_URL') }}/articles/edit/{{ $article->id }}" class="underline">{{ $article->title }}</a></td>
                         </tr>
                     @endforeach
                     </tbody>

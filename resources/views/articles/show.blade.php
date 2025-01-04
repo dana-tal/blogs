@@ -3,7 +3,7 @@
     $article_q = session('article_q')??'';
     $cat = session('cat')??'';
 
-    $back_url = "/front/articles";
+    $back_url = env('APP_URL')."/front/articles";
     $params = array();
     if (!empty($article_q))
     {
@@ -37,7 +37,7 @@
 
             <div>
                 @auth
-                    <form method="POST" action="/front/add_comment">
+                    <form method="POST" action="{{ env('APP_URL') }}/front/add_comment">
                         @csrf
                         <div class="flex flex-row mb-3  ">
                             <div ><label class="font-bold" for="comment">Comment:</label></div>
@@ -63,11 +63,11 @@
 
             <div class="flex justify-center mt-5">
                 @foreach($tags as $tag)
-                        <a href="/front/articles/search?q={{ $tag->name}}"  class="bg-green-600 mx-5 rounded-xl px-3 py-3 hover:bg-green-300">{{ $tag->name }}</a>
+                        <a href="{{ env('APP_URL') }}/front/articles/search?q={{ $tag->name}}"  class="bg-green-600 mx-5 rounded-xl px-3 py-3 hover:bg-green-300">{{ $tag->name }}</a>
                 @endforeach
             </div>
             @if ($parent==='blogs')
-                <div class="mt-5"><a href="/front/blog/{{ $article->blog->id }}/{{ $page_id }}">Back to this Article's blog </a></div>
+                <div class="mt-5"><a href="{{ env('APP_URL') }}/front/blog/{{ $article->blog->id }}/{{ $page_id }}">Back to this Article's blog </a></div>
             @else
                 <div class="mt-5"><a href="{{ $back_url }}">Back to Articles </a></div>
             @endif
