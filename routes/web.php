@@ -51,12 +51,12 @@ Route::middleware('auth')->group( function () {
     Route::patch('/blogs/{blog}',[BlogController::class,'update'])->can('update','blog');
     Route::delete('/blogs/{blog}',[BlogController::class,'destroy'])->can('delete','blog');
 
-    Route::get('/articles/{blog}',[ArticleController::class,'index']);
-    Route::get('/articles/add/{blog}',[ArticleController::class,'create']);
-    Route::post('/articles/{blog}',[ArticleController::class,'store']);
-    Route::get('/articles/edit/{article}',[ArticleController::class,'edit']);
-    Route::patch('/articles/{article}',[ArticleController::class,'update']);
-    Route::delete('/articles/{blog}',[ArticleController::class,'destroy']);
+    Route::get('/articles/{blog}',[ArticleController::class,'index'])->can('viewAny','blog');
+    Route::get('/articles/add/{blog}',[ArticleController::class,'create'])->can('create','blog');
+    Route::post('/articles/{blog}',[ArticleController::class,'store'])->can('create','blog');
+    Route::get('/articles/edit/{article}',[ArticleController::class,'edit'])->can('edit','article');
+    Route::patch('/articles/{article}',[ArticleController::class,'update'])->can('update','article');
+    Route::delete('/articles/{blog}',[ArticleController::class,'destroy'])->can('delete','blog');
 });
 
 Route::fallback(function () {

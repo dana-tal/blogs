@@ -2,24 +2,25 @@
 
 namespace App\Policies;
 
+use App\Models\Article;
 use App\Models\Blog;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class BlogPolicy
+class ArticlePolicy
 {
     /**
      * Determine whether the user can view any models.
      */
-    public function viewAny(User $user,Blog $blog): bool
+    public function viewAny(User $user): bool
     {
-        return $blog->user->is($user);
+
     }
 
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Blog $blog): bool
+    public function view(User $user, Article $article): bool
     {
         //
     }
@@ -27,38 +28,37 @@ class BlogPolicy
     /**
      * Determine whether the user can create models.
      */
-    public function create(User $user,Blog $blog ): bool
+    public function create(User $user): bool
     {
-        return $blog->user->is($user);
+        //
     }
 
 
-    public function edit(User $user, Blog $blog): bool
-    {
-        return $blog->user->is($user);
-    }
-
+     public function edit(User $user,Article $article): bool
+     {
+        return $article->blog->user->is($user);
+     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Blog $blog): bool
+    public function update(User $user, Article $article): bool
     {
-        return $blog->user->is($user);
+        return $article->blog->user->is($user);
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Blog $blog): bool
+    public function delete(User $user, Article $article): bool
     {
-        return $blog->user->is($user);
+        return $article->blog->user->is($user);
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Blog $blog): bool
+    public function restore(User $user, Article $article): bool
     {
         //
     }
@@ -66,7 +66,7 @@ class BlogPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Blog $blog): bool
+    public function forceDelete(User $user, Article $article): bool
     {
         //
     }
