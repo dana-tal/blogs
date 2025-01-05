@@ -2,10 +2,10 @@
     $blog_q = session('blog_q')??'';
     if (empty($blog_q))
     {
-        $back_url = "/front/blogs?page=".$page_id;
+        $back_url = env('APP_URL')."/front/blogs?page=".$page_id;
     }
     else {
-        $back_url = "/front/blogs/search?q=".$blog_q."&page=".$page_id;
+        $back_url = env('APP_URL')."/front/blogs/search?q=".$blog_q."&page=".$page_id;
     }
 @endphp
 
@@ -20,7 +20,7 @@
                 <div class="text-xl mb-3 font-bold">Articles</div>
                 <ul>
                     @foreach ($articles as $article)
-                        <li class="my-5"><a href="/front/article/{{ $article->id }}/{{ $page_id }}">{{ $article->title }}</a></li>
+                        <li class="my-5"><a href="{{ env('APP_URL') }}/front/article/{{ $article->id }}/{{ $page_id }}">{{ $article->title }}</a></li>
                     @endforeach
                 </ul>
                 <div class="flex justify-center mt-5">

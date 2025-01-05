@@ -1,7 +1,7 @@
 <x-admin_layout>
     <div class="grid grid-cols-1">
         <x-page-heading>Edit Blog</x-page-heading>
-        <x-forms.form method="POST" action="/blogs/{{ $blog->id}}" enctype="multipart/form-data">
+        <x-forms.form method="POST" action="{{ env('APP_URL') }}/blogs/{{ $blog->id}}" enctype="multipart/form-data">
             @method('PATCH')
             <x-forms.input label="Subject" name="subject" value="{{ old('subject',$blog->subject) }}"/>
             <x-forms.input label="Description" name="description" type="textarea"  rows="5" value="{{ old('description',$blog->description) }}"/>
@@ -14,7 +14,7 @@
                 </div>
 
                 <div class="flex flex-row justify-evenly">
-                    <div class="mr-4 pt-2"><a href="/blogs" >Cancel</a></div>
+                    <div class="mr-4 pt-2"><a href="{{ env('APP_URL') }}/blogs" >Cancel</a></div>
                     <div>
                         <x-forms.button >Update Blog</x-forms.button>
                     </div>
@@ -32,16 +32,10 @@
         $("#delete_button").click(function(){
 
             let text = "Are you sure you want to delete this blog (all related articles will be also deleted) ?  Press O.K or Cancel ";
-            console.log(text);
             if (confirm(text) == true )
             {
                     $('#delete-form').submit();
             }
-            else
-            {
-                console.log("in else");
-            }
-            console.log("after if");
 
         });
     </script>
@@ -49,7 +43,7 @@
 
 </x-admin_layout>
 
-<form method="POST" action="/blogs/{{ $blog->id}}" id="delete-form" class="hidden">
+<form method="POST" action="{{ env('APP_URL') }}/blogs/{{ $blog->id}}" id="delete-form" class="hidden">
     @csrf
     @method('DELETE');
   </form>

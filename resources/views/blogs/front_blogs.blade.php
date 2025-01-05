@@ -6,7 +6,7 @@
                 <div class="grid grid-cols-1 ">
                     <h1 class="mb-2 flex justify-center text-3xl font-bold text-green-700 ">Newest Blogs</h1>
 
-                    <x-forms.form action="/front/blogs/search" class="mt-6 mb-6 w-full">
+                    <x-forms.form action="{{ env('APP_URL') }}/front/blogs/search" class="mt-6 mb-6 w-full">
                         <x-forms.input label="Search" name="q" placeholder="Technology..."  value="{{ $blog_q }}"/>
                     </x-forms.form>
 
