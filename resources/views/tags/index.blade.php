@@ -6,7 +6,7 @@
 
         </div>
 
-        <form method="POST" action="/tags" id="delete-form" >
+        <form method="POST" action="{{ env('APP_URL') }}/tags" id="delete-form" >
             @csrf
             @method('DELETE');
             <div class="flex justify-center mt-3">
@@ -14,7 +14,7 @@
                     @foreach($tags as $tag)
                         <li class="mb-2 underline">
                             <span class="mr-2"><input type="checkbox" name="tags[]" value="{{ $tag->id }}"/></span>
-                            <a href="/tags/edit/{{ $tag->id }}">{{$tag->name}}</a>
+                            <a href="{{ env('APP_URL') }}/tags/edit/{{ $tag->id }}">{{$tag->name}}</a>
                         </li>
                     @endforeach
                 </ul>
