@@ -17,11 +17,11 @@
     @php
      $item1 = new stdClass();
      $item1->title = 'Blogs';
-     $item1->link  = '/front/blogs';
+     $item1->link  = env('APP_URL').'/front/blogs';
 
      $item2 = new stdClass();
      $item2->title = 'Articles';
-     $item2->link  = '/front/articles';
+     $item2->link  = env('APP_URL').'/front/articles';
 
     @endphp
     <div class="px-10">

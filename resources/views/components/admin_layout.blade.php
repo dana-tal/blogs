@@ -19,11 +19,11 @@
     @php
      $item1 = new stdClass();
      $item1->title = 'Blogs';
-     $item1->link  = '/front/blogs';
+     $item1->link  = env('APP_URL').'/front/blogs';
 
      $item2 = new stdClass();
      $item2->title = 'Articles';
-     $item2->link  = '/front/articles';
+     $item2->link  = env('APP_URL').'/front/articles';
 
     @endphp
     <div class="px-10">
@@ -35,13 +35,13 @@
                 <div class="col-span-1 bg-camelBrown ">
                     <div class="flex justify-center mt-4 font-bold text-white">
                         <ul >
-                            <x-sidebar_li  link="/blogs" :active="request()->is('blogs')">Manage Blogs</x-sidebar_li>
+                            <x-sidebar_li  link="{{ env('APP_URL') }}/blogs" :active="request()->is('blogs')">Manage Blogs</x-sidebar_li>
                             @can('viewAny',App\Models\Category::class)
                                 <x-sidebar_li  link="/categories" :active="request()->is('categories')">Manage Categories</x-sidebar_li>
                             @endcan
 
                             @can('viewAny',App\Models\Tag::class)
-                                <x-sidebar_li   link="/tags" :active="request()->is('tags')">Manage Tags</x-sidebar_li>
+                                <x-sidebar_li   link="{{ env('APP_URL') }}/tags" :active="request()->is('tags')">Manage Tags</x-sidebar_li>
                             @endcan
 
 
@@ -50,7 +50,7 @@
                             </x-sidebar_li >
                             <ul id="blogs_list" class="list-disc mx-auto ms-12 w-60 justify-center mt-0 hidden">
                                 @foreach(Auth::user()->blogs as $blog)
-                                    <li><a href="/articles/{{$blog->id}}" class="hover:bg-brownBear">{{ $blog->subject }}</a></li>
+                                    <li><a href="{{ env('APP_URL') }}/articles/{{$blog->id}}" class="hover:bg-brownBear">{{ $blog->subject }}</a></li>
                                 @endforeach
                             </ul>
 

@@ -43,7 +43,7 @@
                     <li >
                         <a
                         class="text-center block w-full whitespace-nowrap bg-orange-100 px-4 py-2 text-sm font-normal text-neutral-700 hover:bg-deerBrown focus:bg-zinc-200/60 focus:outline-none active:bg-zinc-200/60 active:no-underline dark:bg-surface-dark dark:text-white dark:hover:bg-neutral-800/25 dark:focus:bg-neutral-800/25 dark:active:bg-neutral-800/25"
-                        href="/front/articles/search?q=&cat={{ $cat->id }}"
+                        href="{{ env('APP_URL') }}/front/articles/search?q=&cat={{ $cat->id }}"
                         data-twe-dropdown-item-ref
                         >
                         {{ $cat->name }}
@@ -62,8 +62,8 @@
     @auth
         <div class="space-x-6 font-bold flex">
              <span class="py-3">Hello, {{ Auth::user()->name }}</span>
-             <a href="/blogs" class="hover:bg-darkBrown px-3 py-3 rounded-xl {{ request()->is('blogs')? 'underline':'' }}">Manage Your Blog</a>
-            <form method="POST" action="/logout">
+             <a href="{{ env('APP_URL') }}/blogs" class="hover:bg-darkBrown px-3 py-3 rounded-xl {{ request()->is('blogs')? 'underline':'' }}">Manage Your Blog</a>
+            <form method="POST" action="{{ env('APP_URL') }}/logout">
                 @csrf
                 @method('DELETE')
                 <button class="hover:bg-darkBrown px-3 py-3 rounded-xl">Log Out</button>
@@ -73,8 +73,8 @@
 
     @guest
     <div class="space-x-6 font-bold">
-        <a href="/register" class="hover:bg-darkBrown px-3 py-3 rounded-xl">Sign Up</a>
-        <a href="/login" class="hover:bg-darkBrown px-3 py-3 rounded-xl">Log In</a>
+        <a href="{{ env('APP_URL') }}/register" class="hover:bg-darkBrown px-3 py-3 rounded-xl">Sign Up</a>
+        <a href="{{ env('APP_URL') }}/login" class="hover:bg-darkBrown px-3 py-3 rounded-xl">Log In</a>
     </div>
     @endguest
 </nav>
