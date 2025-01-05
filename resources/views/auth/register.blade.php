@@ -1,6 +1,6 @@
 <x-layout>
     <x-page-heading>Register an Account</x-page-heading>
-    <x-forms.form method="POST" action="/register" enctype="multipart/form-data">
+    <x-forms.form method="POST" action="{{ env('APP_URL') }}/register" enctype="multipart/form-data">
         <x-forms.input label="Name" name="name" />
         <x-forms.input label="Email" name="email" type="email" />
         <x-forms.input label="Password" name="password" type="password" />
