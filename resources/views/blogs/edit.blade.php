@@ -6,7 +6,7 @@
             <x-forms.input label="Subject" name="subject" value="{{ old('subject',$blog->subject) }}"/>
             <x-forms.input label="Description" name="description" type="textarea"  rows="5" value="{{ old('description',$blog->description) }}"/>
             <x-forms.input label="Upload Image" name="image" type="file" />
-            <div class="flex justify-center" ><img src="{{ asset($blog->image) }}" alt="" class="rounded-xl" width="250"></div>
+            <div class="flex justify-center" ><img src="{{ asset('storage/'.$blog->image) }}" alt="" class="rounded-xl" width="250"></div>
 
             <div class="mt-6 flex flex-row justify-between ">
                 <div >
