@@ -2,7 +2,7 @@
 
 <nav class="flex justify-between items-center py-4 border-b border-white/10 bg-brownBear  text-white px-3">
     <div class="ml-4">
-        <a href="/">
+        <a href="{{ env('APP_URL') }}/">
             <img src="{{ Vite::asset('resources/images/pencil.svg') }}" alt="" width="35px">
         </a>
     </div>
