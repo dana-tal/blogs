@@ -17,11 +17,17 @@ class BlogFactory extends Factory
      */
     public function definition(): array
     {
+        do
+        {
+            $image_val = fake()->imageUrl();
+            $exists = \App\Models\Blog::where('image', $image_val)->exists();
+        }while ($exists===true);
+
         return [
             'user_id'=> rand(1,10),
             'subject'=>fake()->catchPhrase(),
             'description'=>fake()->realText(),
-            'image'=>fake()->imageUrl()
+            'image'=>$image_val
         ];
     }
 }
