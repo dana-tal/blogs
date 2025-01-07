@@ -22,7 +22,8 @@ export default {
                 "darkBrown":"#654321",
                 "tan":"#D2B48C",
                 "frenchBeige":"#C8AD7F",
-                "deerBrown":"#E6BF83"
+                "deerBrown":"#E6BF83",
+                "darkBeige":"##9F8C76"
             },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],

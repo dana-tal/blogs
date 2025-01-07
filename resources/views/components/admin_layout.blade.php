@@ -37,7 +37,7 @@
                         <ul >
                             <x-sidebar_li  link="{{ env('APP_URL') }}/blogs" :active="request()->is('blogs')">Manage Blogs</x-sidebar_li>
                             @can('viewAny',App\Models\Category::class)
-                                <x-sidebar_li  link="/categories" :active="request()->is('categories')">Manage Categories</x-sidebar_li>
+                                <x-sidebar_li  link="{{ env('APP_URL') }}/categories" :active="request()->is('categories')">Manage Categories</x-sidebar_li>
                             @endcan
 
                             @can('viewAny',App\Models\Tag::class)
@@ -48,9 +48,9 @@
                             <x-sidebar_li link="#" mb="mb-0">
                                 <button type="button" id="manage">Manage Articles </button>
                             </x-sidebar_li >
-                            <ul id="blogs_list" class="list-disc mx-auto ms-12 w-60 justify-center mt-0 hidden">
+                            <ul id="blogs_list" class=" mx-auto ms-0 w-60 justify-center mt-0 hidden bg-frenchBeige">
                                 @foreach(Auth::user()->blogs as $blog)
-                                    <li><a href="{{ env('APP_URL') }}/articles/{{$blog->id}}" class="hover:bg-brownBear">{{ $blog->subject }}</a></li>
+                                    <li class=" flex px-5"><a href="{{ env('APP_URL') }}/articles/{{$blog->id}}" class="hover:bg-brownBear">{{ $blog->subject }}</a></li>
                                 @endforeach
                             </ul>
 
