@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\Category::class);
             $table->string('title');
             $table->longText('body');
+            $table->string('image')->nullable();
             $table->timestamps();
         });
 

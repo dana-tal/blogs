@@ -28,7 +28,7 @@
             <ul>
                 @foreach ($articles as $article)
                     <li class="mb-2">
-                        <x-article_card :$article :article_ind="$ind"  :page_id="$articles->currentPage()"/>
+                        <x-article_card :$article :article_ind="$ind"  :page_id="$articles->currentPage()" />
                     </li>
                     @php
                      $ind++;

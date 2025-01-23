@@ -32,6 +32,14 @@
             <div>By: {{ $article->blog->user->name }}</div>
             <div>Cagetory: {{ $article->category->name }}</div>
 
+            <div class="flex items-center mt-5">
+                @if (!empty($article->image))
+                    <image src="{{ asset($article->image) }}"  class="rounded-xl !h-32 " width="220px" />
+                @else
+                     <div class="bg-white  rounded-xl h-[126px] w-[220px] flex items-center justify-center" >No image available</div>
+                @endif
+            </div>
+
             <div class="mt-5 mb-5">{{ $article->body }}</div>
 
 

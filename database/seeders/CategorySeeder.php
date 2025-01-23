@@ -13,7 +13,10 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        $categories = array('News','Economy','Sport','Culture','Health','Weather','Food','Vehicles','Environment','Science','Parenting','Fashion','Vacations');
+        $categories = array('News','Economy','Sport','Culture','Health',
+                            'Weather','Food','Vehicles','Environment','Science',
+                            'Politics','Fashion','Technology','Lifestyle','Education',
+                            'Literature','Music','Business','Entertainment');
         foreach($categories as $cat)
         {
             Category::create(['name'=>$cat]);

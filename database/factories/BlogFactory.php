@@ -17,12 +17,13 @@ class BlogFactory extends Factory
      */
     public function definition(): array
     {
-        do
+       /* do
         {
             $image_val = fake()->imageUrl();
             $exists = \App\Models\Blog::where('image', $image_val)->exists();
         }while ($exists===true);
-
+    */
+        $image_val = 'https://picsum.photos/200';
         return [
             'user_id'=> rand(1,10),
             'subject'=>fake()->catchPhrase(),

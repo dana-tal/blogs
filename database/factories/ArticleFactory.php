@@ -22,7 +22,8 @@ class ArticleFactory extends Factory
             'blog_id'=>rand(1,50),
             'category_id'=>rand(1, $categories_num),
             'title'=>fake()->catchPhrase(),
-            'body'=>fake()->realText()
+            'body'=>fake()->realText(),
+            'image'=>'https://picsum.photos/200'
         ];
 
     }
