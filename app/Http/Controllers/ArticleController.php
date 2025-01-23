@@ -8,7 +8,8 @@ use App\Models\Category;
 use App\Models\Tag;
 use App\Rules\commaSeparatedRule;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rules\File;
+use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
@@ -93,14 +94,27 @@ class ArticleController extends Controller
             'title'  => ['required'],
             'category_id'=>['required'],
             'keywords'=>['required',new commaSeparatedRule()],
-            'body' =>['required']
+            'body' =>['required'],
+            'image' => ['image','max:2048','unique:articles,image',File::types(['png', 'jpg', 'jpeg','gif'])]
         ]);
+
+        if ($request->image)
+        {
+            $image_path = $request->image->store('images');
+        }
+        else
+        {
+            $image_path = null;
+        }
+
+      //  dd($image_path);
 
        $article = Article::create([
             'blog_id'=> $blog->id,
             'category_id'=>$attributes['category_id'],
             'title'=>$attributes['title'],
-            'body'=>$attributes['body']
+            'body'=>$attributes['body'],
+            'image'=>$image_path
         ]);
 
         $added_keywords = $this->get_keywords($attributes['keywords']);
@@ -180,13 +194,34 @@ class ArticleController extends Controller
             'category_id'=>['required'],
             'keywords'=>['required',new commaSeparatedRule()],
             'body' =>['required'],
+            'image' => ['image','max:2048','unique:articles,image',File::types(['png', 'jpg', 'jpeg','gif'])]
         ]);
 
-        $article->update([
-            'title' => $attributes['title'],
-            'category_id'=>$attributes['category_id'],
-            'body' => $attributes['body'],
-        ]);
+
+        if ($request->image)
+        {
+            if ( $article->image)
+            {
+                Storage::delete($article->image);
+            }
+            $image_path = $request->image->store('images');
+            $props = [
+                'title' => $attributes['title'],
+                'category_id'=>$attributes['category_id'],
+                'body' => $attributes['body'],
+                'image'=>$image_path
+            ];
+        }
+        else
+        {
+            $image_path = null;
+            $props = [
+                'title' => $attributes['title'],
+                'category_id'=>$attributes['category_id'],
+                'body' => $attributes['body'],
+            ];
+        }
+        $article->update($props);
 
         $tags = $article->tags;
         $old_keywords = array();

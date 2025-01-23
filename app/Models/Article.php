@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
@@ -17,6 +18,7 @@ class Article extends Model
         'category_id',
         'title',
         'body',
+        'image'
     ];
 
     public function blog(): BelongsTo
@@ -54,6 +56,12 @@ class Article extends Model
         }
         $article->tags()->detach();
         $article->comments()->delete();
+
+        if ($article->image)
+        {
+            Storage::delete($article->image);
+        }
+
         $article->delete();
     }
 
@@ -70,6 +78,10 @@ class Article extends Model
         }
         $this->tags()->detach();
         $this->comments()->delete();
+        if ($this->image)
+        {
+            Storage::delete($this->image);
+        }
         $this->delete();
     }
 }
