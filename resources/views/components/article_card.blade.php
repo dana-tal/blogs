@@ -8,7 +8,7 @@
 
 <div class="flex h-[140px] {{ $bg_color }}" >
 
-    <div class="flex items-center justify-center  w-1/4 h-full  ">
+    <div class="flex items-center justify-center  w-1/4 h-full  py-3 px-2">
         @if (!empty($article->image))
             <image src="{{ asset($image_path) }}"  class="rounded-xl !h-32 " width="220px" />
         @else
