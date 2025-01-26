@@ -15,8 +15,8 @@ class CategorySeeder extends Seeder
     {
         $categories = array('News','Economy','Sport','Culture','Health',
                             'Weather','Food','Vehicles','Environment','Science',
-                            'Politics','Fashion','Technology','Lifestyle','Education',
-                            'Literature','Music','Business','Entertainment');
+                            'Politics','Fashion','Technology','Lifestyle','Education' /*,
+                            'Literature','Music','Business','Entertainment' */);
         foreach($categories as $cat)
         {
             Category::create(['name'=>$cat]);

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\User::class);
             $table->string('subject');
             $table->text('description');
-            $table->string('image')->nullable(); //->unique()
+            $table->string('image')->unique()->nullable(); //->unique()
             $table->timestamps();
         });
     }

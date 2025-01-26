@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Article;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,7 +17,7 @@ class CommentFactory extends Factory
      * @return array<string, mixed>
      */
 
-    private $comments = [
+    public static $comments = [
         "This article is very informative.",
         "I found this article to be quite insightful.",
         "The author did a great job explaining this topic.",
@@ -74,7 +75,7 @@ class CommentFactory extends Factory
         }while($user_id === $owner_id);
 
         $comment_ind = rand(0,39);
-        $comment = $this->comments[$comment_ind];
+        $comment = self::$comments[$comment_ind];
 
         return [
             'article_id'=>$article_id,
@@ -82,4 +83,6 @@ class CommentFactory extends Factory
             'comment'=>$comment //fake()->catchPhrase()
         ];
     }
+
+
 }
