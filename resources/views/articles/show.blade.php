@@ -23,6 +23,7 @@
     else {
          $back_url .= "?page=".$page_id;
     }
+    $image_path =   str_starts_with($article->image, 'http')? $article->image: 'storage/'.$article->image;
 @endphp
 
 <x-layout>
@@ -34,7 +35,7 @@
 
             <div class="flex items-center mt-5">
                 @if (!empty($article->image))
-                    <image src="{{ asset($article->image) }}"  class="rounded-xl !h-32 " width="220px" />
+                    <image src="{{ asset($image_path) }}"  class="rounded-xl !h-32 " width="220px" />
                 @else
                      <div class="bg-white  rounded-xl h-[126px] w-[220px] flex items-center justify-center" >No image available</div>
                 @endif
