@@ -3,14 +3,14 @@
 @php
 
   $bg_color = $article_ind %2===0 ? 'bg-camelBrown':'bg-tan';
-
+  $image_path =   str_starts_with($article->image, 'http')? $article->image: 'storage/'.$article->image;
 @endphp
 
 <div class="flex h-[140px] {{ $bg_color }}" >
 
     <div class="flex items-center justify-center  w-1/4 h-full  ">
         @if (!empty($article->image))
-            <image src="{{ asset($article->image) }}"  class="rounded-xl !h-32 " width="220px" />
+            <image src="{{ asset($image_path) }}"  class="rounded-xl !h-32 " width="220px" />
         @else
              <div class="bg-white  rounded-xl h-[126px] w-[220px] flex items-center justify-center" >No image available</div>
         @endif
