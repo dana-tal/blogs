@@ -1,5 +1,6 @@
 Introduction
-Desciption: A website where each user can manage multiple blogs. For each blog, articles can be created and managed. 
+============
+A website where each user can manage multiple blogs. For each blog, articles can be created and managed. 
 The articles are categorized by categories or keywords. Articles can be searched by keywords or categories.
 Registered users can comment on existing articles. An admin user can also manage categories and keywords.
 The website pulls content articles by connecting to an API (https://newsapi.org).
@@ -14,6 +15,7 @@ Github: Blogs github link
 
 
 How to install
+==============
 1)	sudo git clone https://github.com/dana-tal/blogs.git
 2)	sudo chown ubuntu:ubuntu –R blogs
 3)	cd blogs
