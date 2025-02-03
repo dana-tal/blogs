@@ -14,8 +14,15 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        self::create_special_users();
+        User::factory(8)->create();
+    }
+
+    public static function create_special_users()
+    {
         $admin_pass = env('ADMIN_PASS');
         $test_pass = env('TEST_PASS');
+
         User::create([
             'name' => 'Dana Tal',
             'email' => 'dana@gmail.com',
@@ -31,6 +38,5 @@ class UserSeeder extends Seeder
             'password' => bcrypt($test_pass),
             'remember_token' => Str::random(10),
         ]);
-        User::factory(8)->create();
     }
 }

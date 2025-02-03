@@ -230,8 +230,10 @@ class DataProcessor
 
                         try
                         {
-                            $html_content = file_get_contents($article->url);
-                            $text_content = $this->getBodyTextFromHtml($html_content,$title);
+                            $article->content = preg_replace('/… \[.*?\]/', '', $article->content);
+                           // $text_content = $article->content;
+                             $html_content = file_get_contents($article->url);
+                             $text_content = $this->getBodyTextFromHtml($html_content,$title);
                                 if (!empty($text_content) && !empty($image_name) && strlen($article->title)<191 )
                                 {
                                     $article->long_content = $text_content;

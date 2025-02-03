@@ -123,6 +123,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(CategorySeeder::class);
         $categories = Category::all();
+        UserSeeder::create_special_users();
         foreach ($categories as $cat)
         {
            $cat_name = strtolower($cat->name);
@@ -152,9 +153,12 @@ class DatabaseSeeder extends Seeder
 
                $blog_title = $article->author."'s Blog regarding ".$cat_name;
                $blog_id = $this->get_blog($user_id,$blog_title,$article->description,$last_image);
-            //   echo "blog_id=".$blog_id."\n";
                $article_id = $this->create_article($blog_id,$cat->id,$article->title,$article->long_content,$last_image);
-           //    echo "image_name: ".$article->image_name."\n";
+             //  $article_id = $this->create_article($blog_id,$cat->id,$article->title,$article->content,$last_image);
+
+
+               //   echo "blog_id=".$blog_id."\n";
+          //    echo "image_name: ".$article->image_name."\n";
            //    echo "article_id=".$article_id."\n\n";
                $keywords = $this->data_pr->getKeywords($article->title);
                foreach ($keywords as $keyword)
