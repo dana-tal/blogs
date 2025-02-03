@@ -30,7 +30,7 @@
     <div class="flex justify-center ">
         <div class="grid grid-col-1">
             <div class="flex justify-center text-xl font-bold mb-3">{{ $article->title }}</div>
-            <div>By: {{ $article->blog->user->name }}</div>
+            <div>By: <a href="{{ env('APP_URL') }}/front/blog/{{ $article->blog->id }}/1" class="underline">{{ $article->blog->user->name }}</a></div>
             <div>Cagetory: {{ $article->category->name }}</div>
 
             <div class="flex items-center mt-5">
