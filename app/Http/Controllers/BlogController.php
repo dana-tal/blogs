@@ -44,7 +44,7 @@ class BlogController extends Controller
         $attributes = $request->validate([
             'subject'  => ['required'],
             'description' =>['required'],
-            'image' => ['image','max:2048','unique:blogs,image',File::types(['png', 'jpg', 'jpeg','gif'])]
+            'image' => ['image','max:2048','unique:blogs,image',File::types(['png', 'jpg', 'jpeg','gif','webp'])]
         ]);
 
         if ($request->image)
@@ -101,7 +101,7 @@ class BlogController extends Controller
         $attributes = $request->validate([
             'subject'  => ['required'],
             'description' =>['required'],
-            'image' => ['image','max:2048','unique:blogs,image',File::types(['png', 'jpg', 'jpeg','gif'])]
+            'image' => ['image','max:2048','unique:blogs,image',File::types(['png', 'jpg', 'jpeg','gif','webp'])]
         ]);
 
        // $blog = Blog::find($id);
