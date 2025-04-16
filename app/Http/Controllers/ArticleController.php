@@ -1,5 +1,5 @@
 <?php
-
+//test3
 namespace App\Http\Controllers;
 
 use App\Models\Article;
@@ -95,7 +95,7 @@ class ArticleController extends Controller
             'category_id'=>['required'],
             'keywords'=>['required',new commaSeparatedRule()],
             'body' =>['required'],
-            'image' => ['image','max:2048','unique:articles,image',File::types(['png', 'jpg', 'jpeg','gif'])]
+            'image' => ['image','max:2048','unique:articles,image',File::types(['png', 'jpg', 'jpeg','gif','webp'])]
         ]);
 
         if ($request->image)
@@ -194,7 +194,7 @@ class ArticleController extends Controller
             'category_id'=>['required'],
             'keywords'=>['required',new commaSeparatedRule()],
             'body' =>['required'],
-            'image' => ['image','max:2048','unique:articles,image',File::types(['png', 'jpg', 'jpeg','gif'])]
+            'image' => ['image','max:2048','unique:articles,image',File::types(['png', 'jpg', 'jpeg','gif','webp'])]
         ]);
 
 
